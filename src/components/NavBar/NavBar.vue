@@ -171,12 +171,6 @@
   const toPerson = () => {
     router.push('/person');
   };
-
-  // 跳转至源码
-  // const toWebCode = () => {
-  //   router.push('/webcode');
-  // };
-
   // 跳转至管理员界面
   const toAdmin = () => {
     router.push('/admin');

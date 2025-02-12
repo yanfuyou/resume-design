@@ -14,11 +14,11 @@
     <!-- 模板选择 -->
     <template-select ref="templeTef"></template-select>
     <!-- 根据用途挑选简历 -->
-    <select-template-by-use></select-template-by-use>
+    <select-template-by-use v-if="false"></select-template-by-use>
     <!-- 简历功能介绍 -->
-    <resume-function-introduce></resume-function-introduce>
+    <resume-function-introduce v-if="false"></resume-function-introduce>
     <!-- 网站开源信息 -->
-    <website-open-source></website-open-source>
+    <website-open-source v-if="false"></website-open-source>
 
     <!-- 积木创作 -->
     <!-- <lego-design-introduce-vue ref="legoDesignRef"></lego-design-introduce-vue> -->
@@ -27,7 +27,7 @@
     <!-- 成为赞助者 -->
     <!-- <sponsor-com-vue ref="sponsorRefs"></sponsor-com-vue> -->
     <!-- 网站相关数据 -->
-    <web-data></web-data>
+    <web-data v-if="false"></web-data>
     <!-- footer -->
     <footer-com></footer-com>
     <!-- 回到顶部 -->

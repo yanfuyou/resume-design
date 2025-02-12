@@ -29,12 +29,6 @@
     </div>
     <div class="nav-center"> </div>
     <div class="nav-right">
-      <el-button type="text" style="margin-right: 10px" @click="toOld">旧版入口</el-button>
-      <!-- <el-tooltip effect="dark" content="AI智能简历体检" placement="bottom">
-        <div class="icon-box icon-AI-YH" @click="downloadResume">
-          <svg-icon icon-name="icon-zhinengyouhua" color="#fff" size="26px"></svg-icon>
-        </div>
-      </el-tooltip> -->
       <el-tooltip effect="dark" content="AI智能语种切换" placement="bottom">
         <div class="ai-bot-container" @click="languageSelect"
           ><img src="../../../assets/images/ai-translate.webp" width="24" height="24" /><div
@@ -119,11 +113,6 @@
   const router = useRouter();
   const returnPage = () => {
     router.go(-1);
-  };
-
-  // 跳转至旧版本
-  const toOld = () => {
-    router.push('/template');
   };
 
   // 更改标题

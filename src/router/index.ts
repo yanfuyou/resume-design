@@ -21,7 +21,6 @@ const MyComment = () => import('@/views/person/myComment/index.vue');
 const MyResume = () => import('@/views/person/myResume/index.vue');
 const PdfPreview = () => import('@/views/PdfPreview/index.vue'); // 老版本简历预览界面
 const ResumePreview = () => import('@/views/createTemplate/previewer/index.vue');
-const Template = () => import('@/views/template/index.vue');
 const Resume = () => import('@/views/resumeList/index.vue');
 const ResumeContent = () => import('@/views/resumeContent/index.vue');
 const Word = () => import('@/views/word/index.vue');
@@ -33,7 +32,6 @@ const PersonIntegral = () => import('@/views/person/integralDetail/index.vue');
 const OnlinePreview = () => import('@/views/onlinePreview/index.vue');
 const MyOnlineResume = () => import('@/views/person/onlineResume/index.vue');
 const LegoCreate = () => import('@/views/person/legoCreate/index.vue');
-const WebCode = () => import('@/views/webCode/index.vue');
 const LegoDesigner = () => import('@/views/LegoDesigner/index.vue');
 const PostWorkSuccess = () => import('@/views/LegoDesigner/postWordSuccess/index.vue');
 const LegoTemplateList = () => import('@/views/legoTemplateList/index.vue');
@@ -83,7 +81,6 @@ const PublishSuccess = () =>
   import('@/views/admin/ArticleManage/AddArticle/pages/publishSuccess.vue');
 const PayList = () => import('@/views/admin/payStats/payList/index.vue');
 const YipayList = () => import('@/views/admin/payStats/yipayList/index.vue');
-const DeployDoc = () => import('@/views/deployDoc/index.vue');
 const ArticleDetail = () => import('@/views/deployDoc/pages/articleDetails.vue');
 const IntegralList = () => import('@/views/admin/integralManage/IntegralList/index.vue');
 const IntegralPayConfig = () => import('@/views/admin/integralManage/IntegralPayConfig/index.vue');
@@ -283,18 +280,6 @@ const routes: Array<RouteRecordRaw> = [
     component: ResetPassword
   },
   {
-    path: '/template',
-    name: 'Template',
-    meta: {
-      title: '模板列表',
-      keepAlive: true,
-      isShowComNav: true,
-      requireLogin: false,
-      requireAdmin: false
-    },
-    component: Template
-  },
-  {
     path: '/resume',
     name: 'Resume',
     meta: {
@@ -462,30 +447,18 @@ const routes: Array<RouteRecordRaw> = [
     },
     component: NoPermission
   },
-  {
-    path: '/webCode',
-    name: 'WebCode',
-    meta: {
-      title: '源码获取',
-      keepAlive: true,
-      isShowComNav: true,
-      requireLogin: false,
-      requireAdmin: false
-    },
-    component: WebCode
-  },
-  {
-    path: '/deployDoc',
-    name: 'DeployDoc',
-    meta: {
-      title: '部署指南',
-      keepAlive: true,
-      isShowComNav: true,
-      requireLogin: true,
-      requireAdmin: false
-    },
-    component: DeployDoc
-  },
+  // {
+  //   path: '/webCode',
+  //   name: 'WebCode',
+  //   meta: {
+  //     title: '源码获取',
+  //     keepAlive: true,
+  //     isShowComNav: true,
+  //     requireLogin: false,
+  //     requireAdmin: false
+  //   },
+  //   component: WebCode
+  // },
   {
     path: '/wordPreview/:id',
     name: 'WordPreview',

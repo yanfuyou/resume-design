@@ -270,6 +270,13 @@ export const formatNumber = (num: number) => {
 export const buildTree = (items: any) => {
   // 创建一个映射，用于快速查找父节点
   const map: any = {};
+  // TODO: 删除源码相关的菜单，后期写死
+  items = items.filter(
+    (item: any) =>
+      item._id != '666c3c0a794cb509aa0aa81a' && item.parentId != '666c3c0a794cb509aa0aa81a'
+  );
+
+  console.log('items', items);
   items.forEach((item: any) => (map[item._id] = { ...item, children: [] }));
 
   // 创建一个结果数组，存放最终的树形结构
