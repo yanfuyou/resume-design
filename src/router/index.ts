@@ -6,10 +6,8 @@ import { getUserPermissionAsync } from '@/http/api/user';
 import { title, description, keywords } from '@/config/seo';
 import { useHead } from '@vueuse/head';
 
-const Designer = () => import('@/views/designer/index.vue');
 const DesignResume = () => import('@/views/designerResume/index.vue');
 const Index = () => import('@/views/index/index.vue');
-const Custom = () => import('@/views/custom/index.vue');
 const CreateTemplate = () => import('@/views/createTemplate/designer/index.vue'); // 创建模板
 const EmailVerify = () => import('@/views/emailVerify/index.vue');
 const ForgetPassword = () => import('@/views/forgetPassword/index.vue');
@@ -19,7 +17,6 @@ const PersonDetail = () => import('@/views/person/personDetial/index.vue');
 const AccountSetting = () => import('@/views/person/accountSetting/index.vue');
 const MyComment = () => import('@/views/person/myComment/index.vue');
 const MyResume = () => import('@/views/person/myResume/index.vue');
-const PdfPreview = () => import('@/views/PdfPreview/index.vue'); // 老版本简历预览界面
 const ResumePreview = () => import('@/views/createTemplate/previewer/index.vue');
 const Resume = () => import('@/views/resumeList/index.vue');
 const ResumeContent = () => import('@/views/resumeContent/index.vue');
@@ -123,18 +120,6 @@ const routes: Array<RouteRecordRaw> = [
     component: Index
   },
   {
-    path: '/designer',
-    name: 'Designer',
-    meta: {
-      title: '设计',
-      keepAlive: true,
-      isShowComNav: false,
-      requireLogin: true,
-      requireAdmin: false
-    },
-    component: Designer
-  },
-  {
     path: '/designResume/:id',
     name: 'DesignResume',
     meta: {
@@ -195,18 +180,6 @@ const routes: Array<RouteRecordRaw> = [
     component: PostWorkSuccess
   },
   {
-    path: '/custom',
-    name: 'Custom',
-    meta: {
-      title: '创建模版',
-      keepAlive: true,
-      isShowComNav: false,
-      requireLogin: true,
-      requireAdmin: false
-    },
-    component: Custom
-  },
-  {
     path: '/createTemplate',
     name: 'CreateTemplate',
     meta: {
@@ -217,18 +190,6 @@ const routes: Array<RouteRecordRaw> = [
       requireAdmin: true
     },
     component: CreateTemplate
-  },
-  {
-    path: '/pdfPreview',
-    name: 'PdfPreview',
-    meta: {
-      title: '简历预览页',
-      keepAlive: false,
-      isShowComNav: false,
-      requireLogin: false,
-      requireAdmin: false
-    },
-    component: PdfPreview
   },
   // 新版简历预览页面
   {
@@ -447,18 +408,6 @@ const routes: Array<RouteRecordRaw> = [
     },
     component: NoPermission
   },
-  // {
-  //   path: '/webCode',
-  //   name: 'WebCode',
-  //   meta: {
-  //     title: '源码获取',
-  //     keepAlive: true,
-  //     isShowComNav: true,
-  //     requireLogin: false,
-  //     requireAdmin: false
-  //   },
-  //   component: WebCode
-  // },
   {
     path: '/wordPreview/:id',
     name: 'WordPreview',

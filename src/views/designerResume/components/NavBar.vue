@@ -162,14 +162,14 @@
   // 预览简历
   const dialogPreviewVisible = ref<boolean>(false);
   const previewResume = () => {
-    dialogPreviewVisible.value = true;
-    // router.push({
-    //   path: '/resumePreview',
-    //   query: {
-    //     type: 'page',
-    //     id: route.params.id
-    //   }
-    // });
+    // dialogPreviewVisible.value = true;
+    router.push({
+      path: '/resumePreview',
+      query: {
+        type: 'page',
+        id: route.params.id
+      }
+    });
   };
 
   // 关闭预览弹窗
