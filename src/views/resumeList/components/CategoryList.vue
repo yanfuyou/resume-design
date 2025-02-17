@@ -55,34 +55,11 @@
         </li>
       </ul>
     </div>
-
-    <!-- 具体职业 -->
-    <div class="list-item-box">
-      <span
-        :class="['all-label li', { active: !filterValue.templatePost }]"
-        @click="filterValue.templatePost = ''"
-        >职业</span
-      >
-      <ul>
-        <li
-          v-for="(item, index) in templatePostListCP"
-          :key="index"
-          :class="['li', { active: filterValue.templatePost === item }]"
-          @click="handleSelectTemplatePost(item)"
-        >
-          {{ item }}
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 <script setup lang="ts">
   import { getTemplateStyleListAsync } from '@/http/api/createTemplate';
-  import {
-    templateUseList,
-    templateIndustryList,
-    templatePostList
-  } from '@/dictionary/createTemplate';
+  import { templateUseList, templateIndustryList } from '@/dictionary/createTemplate';
   import { deleteNull } from '@/utils/common';
 
   const emit = defineEmits(['categoryChange']);
@@ -121,25 +98,6 @@
   };
   getCategoryList();
 
-  // 简历具体职业
-  const defaultIndustryList = ref<any>([
-    '前端工程师',
-    '平面设计师',
-    '运营助理',
-    '产品经理',
-    '项目经理'
-  ]);
-  const templatePostListCP = computed(() => {
-    if (filterValue.templateIndustry) {
-      const filter: any = templatePostList.find(
-        (item: any) => item.title === filterValue.templateIndustry
-      );
-      return filter.job;
-    } else {
-      return defaultIndustryList.value;
-    }
-  });
-
   // 选择模版风格
   const handleSelectStyle = (item: any) => {
     filterValue.templateStyle = item.value;
@@ -160,11 +118,6 @@
   const templateIndustryClick = () => {
     filterValue.templatePost = '';
     filterValue.templateIndustry = '';
-  };
-
-  // 选择职业
-  const handleSelectTemplatePost = (item: any) => {
-    filterValue.templatePost = item;
   };
 
   watch(

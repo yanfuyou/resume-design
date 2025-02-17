@@ -5,9 +5,9 @@
       class-name="bilibili"
       :color="iconColor"
       size="25px"
-    ></svg-icon>
-    <span>猫步简历</span> -->
-    <img src="@/assets/images/logo-maobu.png" />
+    ></svg-icon> -->
+    <span>顿悟简历</span>
+    <!-- <img src="@/assets/images/logo-maobu.png" /> -->
   </div>
 </template>
 <script lang="ts" setup>
@@ -40,7 +40,7 @@
       font-size: 22px;
       font-weight: 600;
       font-family: monospace;
-      color: v-bind('fontColor');
+      color: #93d5dc;
       margin-left: 10px;
     }
   }

@@ -258,7 +258,7 @@
           justify-content: center;
           align-items: center;
           width: 100%;
-          color: v-bind('props.fontColor');
+          color: #55bb8a;
           padding: 0 15px !important;
           letter-spacing: 3px;
           font-size: 16px;
