@@ -1,7 +1,7 @@
 <template>
   <div class="footer-box">
     <!-- 相关推荐 -->
-    <div class="recommend">
+    <div v-if="false" class="recommend">
       <!-- 联系我 -->
       <div v-viewer class="contact-me">
         <div v-for="(item, index) in vxQunList" :key="index" class="add-wechat">
@@ -53,14 +53,12 @@
     <div class="line"></div>
     <!-- 版权声明 -->
     <div class="copyright-notice">
-      <p>Copyright © 2024 猫步简历 All Rights Reserved.</p>
+      <p>Copyright © 2025 顿悟简历 All Rights Reserved.</p>
     </div>
     <!-- 备案号 -->
     <div class="icp-record-number">
       <p>
-        <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer"
-          >蜀ICP备2020034752号-4</a
-        >
+        <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">备案号</a>
       </p>
       <!-- <p>
         <a

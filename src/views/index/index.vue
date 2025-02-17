@@ -3,7 +3,7 @@
     <!-- 导航栏 -->
     <nav-bar :bg-color="navColor" :font-color="fontColor" :icon-color="iconColor"></nav-bar>
     <!-- 项目介绍栏 -->
-    <div ref="introduceRef">
+    <div v-if="false" ref="introduceRef">
       <project-introduce
         @free-make="freeMake"
         @see-more="seeMore"

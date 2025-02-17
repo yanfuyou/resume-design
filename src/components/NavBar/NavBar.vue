@@ -18,15 +18,16 @@
           <!-- 只显示启用中的 -->
           <index-menu-item v-if="item.status === 1" :item="item" :key-index="item.name + index" />
         </template>
-        <el-menu-item @click="toArticles">求职攻略</el-menu-item>
       </el-menu>
     </div>
     <!-- GitHub -->
     <div class="right">
       <!-- 今日签到总人数 -->
-      <span v-config:open_sign_in class="attendance-total">今日已签到{{ attendanceTotal }}人~</span>
+      <span v-if="false" v-config:open_sign_in class="attendance-total"
+        >今日已签到{{ attendanceTotal }}人~</span
+      >
       <!-- 签到按钮 -->
-      <div v-config:open_sign_in class="attendance-box">
+      <div v-if="false" v-config:open_sign_in class="attendance-box">
         <div
           v-if="!appStore.useUserInfoStore.userIntegralInfo.isattendance"
           class="button"
@@ -38,16 +39,8 @@
           <div class="have-attend">已签到</div>
         </el-tooltip>
       </div>
-
-      <!-- 源码购买 -->
-      <!-- <div v-config:open_get_source_code class="get-source-code" @click="toWebCode">
-        <div class="content-box">
-          <svg-icon icon-name="icon-VIP" size="20px" color="#789e45"></svg-icon>
-          <span>获取源码</span>
-        </div>
-      </div> -->
       <!-- 开通会员 -->
-      <div v-config:open_membership class="membership-box" @click="toMembership">
+      <div v-if="false" v-config:open_membership class="membership-box" @click="toMembership">
         <div v-if="!membershipInfo.hasMembership" class="content-box">开通会员 </div>
         <div
           v-else-if="membershipInfo.hasMembership && membershipInfo.daysRemaining > 0"
@@ -63,7 +56,7 @@
         </div>
       </div>
       <!-- 简币 -->
-      <div v-config:open_get_source_code class="jb-num-box" @click="toMyIntegral">
+      <div v-if="false" v-config:open_get_source_code class="jb-num-box" @click="toMyIntegral">
         <div class="content">
           <img width="22" src="@/assets/images/jianB.png" alt="简币" />
           <span>{{ appStore.useUserInfoStore.userIntegralInfo.integralTotal || 0 }}</span>
@@ -228,11 +221,6 @@
     }
   };
   getTodayAttendancePersonTotal();
-
-  // 跳转至wordpress页面
-  const toArticles = () => {
-    location.assign('https://maobucv.com/articles');
-  };
 </script>
 <style lang="scss" scoped>
   .nav-bar-box {
