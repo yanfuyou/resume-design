@@ -71,7 +71,7 @@ export const legoCategoryDeleteAsync: any = (id: string) => {
 // 新增积木模板
 export const legoTemplateAddAsync: any = (data: any) => {
   return http.request({
-    url: '/huajian/legoTemplate/legoTemplateAdd',
+    url: '/template/create',
     method: 'post',
     data: data
   });

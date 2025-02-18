@@ -177,7 +177,7 @@
           };
           sureLoading.value = true;
           const data = await legoTemplateAddAsync(params);
-          if (data.data.status === 200) {
+          if (data.status === 200) {
             ElMessage.success('发布成功');
             sureLoading.value = false;
             emit('updateSuccess');

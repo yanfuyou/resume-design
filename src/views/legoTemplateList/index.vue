@@ -178,7 +178,6 @@
         );
         return item;
       });
-      console.log('templateList', templateList.value);
       // TODO 分页数据
       total.value = 0;
       currentPage.value = 1;
