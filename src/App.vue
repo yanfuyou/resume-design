@@ -20,7 +20,7 @@
   import { storeToRefs } from 'pinia';
   // import { openAndCloseLoadingByTime } from './utils/common';
   import zhCn from 'element-plus/es/locale/lang/zh-cn';
-  import { addWebsiteViewsAsync } from './http/api/panel';
+  // import { addWebsiteViewsAsync } from './http/api/panel';
 
   const { isLoading } = storeToRefs(appStore.useLoadingStore);
   // openAndCloseLoadingByTime(1500); // 等待动画层
@@ -28,27 +28,27 @@
   const route = useRoute();
 
   // 查询和更新用户信息
-  const { getAndUpdateUserInfo } = appStore.useUserInfoStore;
-  const { token } = appStore.useTokenStore;
-  if (token) {
-    getAndUpdateUserInfo();
-  }
+  // const { getAndUpdateUserInfo } = appStore.useUserInfoStore;
+  // const { token } = appStore.useTokenStore;
+  // if (token) {
+  //   getAndUpdateUserInfo();
+  // }
 
-  // 查询用简币信息
-  const { getUserIntegralTotal } = appStore.useUserInfoStore;
-  if (token) {
-    getUserIntegralTotal();
-  }
+  // // 查询用简币信息
+  // const { getUserIntegralTotal } = appStore.useUserInfoStore;
+  // if (token) {
+  //   getUserIntegralTotal();
+  // }
 
   // 增加网站访问量
-  const addWebsiteViews = () => {
-    addWebsiteViewsAsync();
-  };
-  addWebsiteViews();
+  // const addWebsiteViews = () => {
+  //   addWebsiteViewsAsync();
+  // };
+  // addWebsiteViews();
 
   // 查询网站配置
-  const { getWebsiteConfig } = appStore.useWebsiteConfigStore;
-  getWebsiteConfig();
+  // const { getWebsiteConfig } = appStore.useWebsiteConfigStore;
+  // getWebsiteConfig();
 </script>
 <style>
   /* 设置了打印会出现问题 */

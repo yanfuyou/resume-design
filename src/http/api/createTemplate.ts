@@ -54,7 +54,7 @@ export const getTemplateByIdAsync: any = (id: string) => {
 // 查询模板列表
 export const templateListAsync: any = (params: any) => {
   return http.request({
-    url: '/huajian/common/templateList',
+    url: '/template/list',
     method: 'get',
     params: params
   });

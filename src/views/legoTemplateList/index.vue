@@ -167,7 +167,7 @@
     };
     const data = await getLegoTemplateListByCategoryAsync(params);
     if (data.status === 200) {
-      templateList.value = data.data.list.map((item: any) => {
+      templateList.value = data.data.map((item: any) => {
         categoryList.value.forEach(
           (categoryItem: { category_label: any; width: string; height: string }) => {
             if (categoryItem.category_label === item.category) {
@@ -179,8 +179,9 @@
         return item;
       });
       console.log('templateList', templateList.value);
-      total.value = data.data.page.count;
-      currentPage.value = data.data.page.currentPage;
+      // TODO 分页数据
+      total.value = 0;
+      currentPage.value = 1;
       isShowSkeleton.value = false;
     } else {
       ElMessage.error(data.message);

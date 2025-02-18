@@ -126,8 +126,8 @@
   const categoryList = ref<any>([]);
   const getCategoryList = async () => {
     const data = await getLegoCategoryListAsync();
-    if (data.data.status) {
-      categoryList.value = data.data.data.map((item: { _id: any; name: any }) => {
+    if (data.status) {
+      categoryList.value = data.data.map((item: { _id: any; name: any }) => {
         return {
           label: item.name,
           value: item._id

@@ -1,7 +1,7 @@
 import { getUserIntegralTotalAsync } from '@/http/api/integral';
 import { getUserInfoAsync } from '@/http/api/user';
 import { defineStore } from 'pinia';
-import appStore from './index';
+// import appStore from './index';
 
 // 用户信息
 export const useUserInfoStore = defineStore('userInfoStore', () => {
@@ -22,13 +22,12 @@ export const useUserInfoStore = defineStore('userInfoStore', () => {
 
   // 查询用户信息
   async function getAndUpdateUserInfo() {
-    const email = userInfo.value ? userInfo.value.email : '';
-    const data = await getUserInfoAsync(email);
-    if (data.data.status === 200) {
-      saveUserInfo(data.data.data);
-      // 查保存用户会员信息
-      const { saveMembershipInfo } = appStore.useMembershipStore;
-      saveMembershipInfo(data.data.data.membershipInfo);
+    const data = await getUserInfoAsync();
+    if (data.status === 200) {
+      saveUserInfo(data.data);
+      // TODO 查保存用户会员信息
+      // const { saveMembershipInfo } = appStore.useMembershipStore;
+      // saveMembershipInfo(data.data.data.membershipInfo);
     } else {
       ElMessage({
         message: data.message,

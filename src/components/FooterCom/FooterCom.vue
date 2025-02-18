@@ -72,42 +72,42 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { getLinksListAsync, getVXQunListUnauthAsync } from '@/http/api/website';
+  // import { getLinksListAsync, getVXQunListUnauthAsync } from '@/http/api/website';
 
   // 查询微信微信群列表
   const vxQunList = ref<any>([]);
-  const getVXQunListUnauth = async () => {
-    vxQunList.value = [];
-    const data = await getVXQunListUnauthAsync();
-    if (data.status === 200) {
-      vxQunList.value = data.data;
-    } else {
-      ElMessage.error(data.data.message);
-    }
-  };
-  getVXQunListUnauth();
+  // const getVXQunListUnauth = async () => {
+  //   vxQunList.value = [];
+  //   const data = await getVXQunListUnauthAsync();
+  //   if (data.status === 200) {
+  //     vxQunList.value = data.data;
+  //   } else {
+  //     ElMessage.error(data.data.message);
+  //   }
+  // };
+  // getVXQunListUnauth();
 
   // 查询友链列表
-  const page = ref<number>(1);
-  const limit = ref<number>(20);
-  const total = ref<number>(0);
-  const currentPage = ref<number>(1);
+  // const page = ref<number>(1);
+  // const limit = ref<number>(20);
+  // const total = ref<number>(0);
+  // const currentPage = ref<number>(1);
   let linksList = ref<any>([]);
-  const getLinksList = async () => {
-    let params = {
-      page: page.value,
-      limit: limit.value
-    };
-    const data = await getLinksListAsync(params);
-    if (data.status === 200) {
-      linksList.value = data.data.list;
-      total.value = data.data.page.count;
-      currentPage.value = data.data.page.currentPage;
-    } else {
-      ElMessage.error(data.data.message);
-    }
-  };
-  getLinksList();
+  // const getLinksList = async () => {
+  //   let params = {
+  //     page: page.value,
+  //     limit: limit.value
+  //   };
+  //   const data = await getLinksListAsync(params);
+  //   if (data.status === 200) {
+  //     linksList.value = data.data.list;
+  //     total.value = data.data.page.count;
+  //     currentPage.value = data.data.page.currentPage;
+  //   } else {
+  //     ElMessage.error(data.data.message);
+  //   }
+  // };
+  // getLinksList();
 </script>
 <style lang="scss" scoped>
   .footer-box {

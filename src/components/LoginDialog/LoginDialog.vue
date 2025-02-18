@@ -154,7 +154,7 @@
               <button class="ghost-button ghost" @click="signIn">立即登录</button>
             </div>
             <div class="overlay-panel overlay-right">
-              <h1>你好, 猫友！</h1>
+              <h1>你好, 小友！</h1>
               <p v-if="websiteConfig.open_sign">还没有账号？快来注册吧！</p>
               <button v-if="websiteConfig.open_sign" class="ghost-button ghost" @click="signUp"
                 >立即注册</button
@@ -287,6 +287,24 @@
   // 获取验证码
   const getEmailCode = async () => {
     if (isDisabled.value) return; // 如果按钮已经禁用，直接返回
+
+    ElMessage.success('验证码发送成功，请前往邮箱查看！');
+    // --------------- TODO :待实现接口
+    // 点击后禁用按钮并开始倒计时
+    isDisabled.value = true;
+    countdown.value = 60;
+
+    timer = setInterval(() => {
+      if (countdown.value > 0) {
+        countdown.value--;
+      } else {
+        // 倒计时结束，重置按钮
+        isDisabled.value = false;
+        if (timer) clearInterval(timer);
+      }
+    }, 1000);
+    return;
+    // ------------
     let params = {
       email: registerForm.email
     };
@@ -320,8 +338,8 @@
   // 登录
   const { setUuid } = appStore.useRefreshStore;
   const { saveToken } = appStore.useTokenStore;
-  const { saveUserInfo } = appStore.useUserInfoStore;
-  const { getUserIntegralTotal } = appStore.useUserInfoStore;
+  // const { saveUserInfo } = appStore.useUserInfoStore;
+  // const { getUserIntegralTotal } = appStore.useUserInfoStore;
   const isLoginLoading = ref<boolean>(false);
   const router = useRouter();
   const loginRuleFormRef = ref<FormInstance>();
@@ -334,9 +352,9 @@
         if (data.status === 200) {
           isLoginLoading.value = false;
           setUuid(); // 无感刷新页面
-          saveToken('Bearer ' + data.data.token.access_token); // 存储token到本地
-          saveUserInfo(data.data.user); // 存储用户信息
-          getUserIntegralTotal(); // 查询简币信息
+          saveToken('Bearer ' + data.data.token); // 存储token到本地
+          // saveUserInfo(data.data.user); // 存储用户信息
+          // getUserIntegralTotal(); // 查询简币信息
           ElMessage({
             message: '登录成功',
             type: 'success'
@@ -429,6 +447,7 @@
 <style lang="scss" scoped>
   .login-dialog-form-box {
     position: relative;
+
     .close-loding-dialog-box {
       position: absolute;
       top: 20px;
@@ -436,6 +455,7 @@
       z-index: 999;
       cursor: pointer;
     }
+
     h1 {
       font-weight: bold;
       margin: 0;
@@ -492,10 +512,12 @@
       cursor: pointer;
       padding: 12px 45px;
     }
+
     .email-code-box {
       display: flex;
       height: 48px;
       align-items: center;
+
       .get-email-code {
         height: 40px;
         display: flex;
@@ -530,8 +552,10 @@
       justify-content: center;
       align-items: center;
       padding: 0 50px;
+
       :deep(.forms_form) {
         width: 100%;
+
         input {
           border: none;
           padding: 10px 12px;
@@ -540,12 +564,15 @@
           font-size: 14px;
           color: #333;
         }
+
         input:-webkit-autofill {
           -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
         }
+
         .el-form-item {
           margin-bottom: 20px;
         }
+
         .el-input__inner {
           background-color: none !important;
         }
@@ -671,6 +698,7 @@
       height: 40px;
       width: 40px;
       cursor: pointer;
+
       &:hover {
         color: #ff4b2b;
       }
@@ -681,9 +709,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
       img {
         cursor: pointer;
         transition: all 0.3s;
+
         &:hover {
           opacity: 0.8;
         }
@@ -694,9 +724,11 @@
 <style lang="scss">
   .login-dialog-box {
     border-radius: 12px;
+
     .el-dialog__header {
       display: none;
     }
+
     .el-dialog__body {
       padding: 0;
       min-height: 500px;

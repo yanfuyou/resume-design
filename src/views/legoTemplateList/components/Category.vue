@@ -12,18 +12,6 @@
         </li>
       </ul>
     </div>
-    <!-- 右侧筛选 -->
-    <div class="right">
-      <div :class="['sort-box', { active: currentSort === 'time' }]" @click="handleSort('time')">
-        <svg-icon
-          icon-name="icon-shijian"
-          class-name="juejin"
-          size="20px"
-          :color="currentSort === 'time' ? '#018060' : '#ccc'"
-        ></svg-icon>
-        <span>时间</span>
-      </div>
-    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -44,20 +32,6 @@
     currentValue.value = item.category_label;
     let queryParams = {
       category: currentValue.value,
-      sort: currentSort.value
-    };
-    emit('getTemplateListByCate', queryParams);
-  };
-
-  const handleSort = (value: string) => {
-    if (currentSort.value) {
-      currentSort.value = '';
-    } else {
-      currentSort.value = value;
-    }
-
-    let queryParams = {
-      category: currentValue.value === '全部' ? '' : currentValue.value,
       sort: currentSort.value
     };
     emit('getTemplateListByCate', queryParams);

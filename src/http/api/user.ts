@@ -7,11 +7,8 @@ interface ILogin {
 }
 export const loginAsync: any = (data: ILogin) => {
   return http.request({
-    url: '/huajian/auth/email/login',
+    url: '/user/login',
     method: 'post',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
     data: data
   });
 };
@@ -24,11 +21,8 @@ interface IRegister {
 }
 export const registerAsync: any = (data: IRegister) => {
   return http.request({
-    url: '/huajian/auth/email/register',
+    url: '/user/register',
     method: 'post',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
     data: data
   });
 };
@@ -43,9 +37,9 @@ export const sendCodeAsync: any = (data: any) => {
 };
 
 // 查询用户信息
-export const getUserInfoAsync: any = (email: string) => {
+export const getUserInfoAsync: any = () => {
   return http.request({
-    url: `/huajian/integral/user/${email}`,
+    url: '/user/info',
     method: 'get'
   });
 };

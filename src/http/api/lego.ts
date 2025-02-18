@@ -3,7 +3,7 @@ import http from '../request';
 // 保存用户草稿
 export const legoUserResumeAsync: any = (data: any) => {
   return http.request({
-    url: '/huajian/lego/legoUserResume',
+    url: '/resume/create',
     method: 'post',
     data: data
   });
@@ -12,7 +12,7 @@ export const legoUserResumeAsync: any = (data: any) => {
 // 查询个人积木创作列表
 export const legoUserResumeListAsync: any = (params: any) => {
   return http.request({
-    url: '/huajian/lego/legoUserResumeList',
+    url: '/template/user-templates',
     method: 'get',
     params: params
   });
@@ -46,7 +46,7 @@ export const addLegoCategoryAsync: any = (data: any) => {
 // 查询积木分类列表
 export const getLegoCategoryListAsync: any = () => {
   return http.request({
-    url: '/huajian/legoCategory/getLegoCategoryList',
+    url: '/template/categorys',
     method: 'get'
   });
 };
@@ -115,7 +115,7 @@ export const getLegoUserTemplateByIdAndJsonIdAsync: any = (params: any) => {
 // 无需权限查询积木创作分类列表
 export const getLegoTemplateCategoryListAsync: any = () => {
   return http.request({
-    url: '/huajian/common/getLegoCategoryList',
+    url: '/template/categorys',
     method: 'get'
   });
 };
@@ -123,7 +123,7 @@ export const getLegoTemplateCategoryListAsync: any = () => {
 // 无需权限根据分类查询模板列表
 export const getLegoTemplateListByCategoryAsync: any = (params: any) => {
   return http.request({
-    url: '/huajian/common/getLegoTemplateListByCategory',
+    url: '/template/list',
     method: 'get',
     params: params
   });

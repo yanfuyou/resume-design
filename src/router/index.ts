@@ -1153,7 +1153,7 @@ router.beforeEach(async (to, from, next) => {
         }
       }
 
-      const emailVerify = JSON.parse(userInfo as string).auth.email.valid;
+      const emailVerify = JSON.parse(userInfo as string).auth.email;
       if (emailVerify || !CONFIG.isEmailVerify) {
         next();
       } else {

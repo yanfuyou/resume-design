@@ -81,12 +81,12 @@
           <el-dropdown v-config:open_person_in :teleported="false">
             <span class="el-dropdown-link">
               <el-avatar
-                v-if="appStore.useUserInfoStore.userInfo.photos.profilePic.url"
+                v-if="appStore.useUserInfoStore.userInfo.avatar"
                 :size="45"
-                :src="appStore.useUserInfoStore.userInfo.photos.profilePic.url"
+                :src="appStore.useUserInfoStore.userInfo.avatar"
               />
               <el-avatar v-else :size="45">
-                {{ appStore.useUserInfoStore.userInfo.name.split('')[0] }}
+                {{ appStore.useUserInfoStore.userInfo }}
               </el-avatar>
             </span>
             <template #dropdown>
@@ -220,7 +220,7 @@
       ElMessage.error(data.message);
     }
   };
-  getTodayAttendancePersonTotal();
+  // getTodayAttendancePersonTotal();
 </script>
 <style lang="scss" scoped>
   .nav-bar-box {
