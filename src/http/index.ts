@@ -68,8 +68,6 @@ class Request {
       }
 
       config.signal = controller.signal;
-
-      console.log('config', config.headers);
       if (!config.headers) {
         config.headers = {};
         config.headers['Content-Type'] = 'application/json';

@@ -44,7 +44,6 @@
           action="#"
           :show-file-list="false"
           :http-request="uploadHandle"
-          :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
           <img v-if="ruleForm.previewUrl" :src="ruleForm.previewUrl" class="avatar" />
@@ -75,7 +74,7 @@
   import appStore from '@/store';
   import { storeToRefs } from 'pinia';
   import { getUuid } from '@/utils/common';
-  import { uploadFile } from '@/http/api/oss';
+  import { getFileUrl, uploadFile } from '@/http/api/oss';
 
   const { HJSchemaJsonStore } = storeToRefs(appStore.useLegoJsonStore);
 
@@ -141,15 +140,9 @@
   };
   getCategoryList();
 
-  const uploadHandle = (options: any) => {
-    console.log('options:', options);
-    uploadFile('template/preview', options.file);
-  };
-
-  const handleAvatarSuccess: UploadProps['onSuccess'] = (response: {
-    data: { data: { fileUrl: string } };
-  }) => {
-    ruleForm.previewUrl = response.data.data.fileUrl;
+  const uploadHandle = async (options: any) => {
+    const objKey = await uploadFile('template/preview', options.file);
+    ruleForm.previewUrl = await getFileUrl(objKey);
   };
 
   const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {

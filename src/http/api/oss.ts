@@ -16,11 +16,25 @@ export const uploadFile = async (path: string, file: File) => {
     Authorization: policy.signature,
     'Content-type': file.type
   };
-  http.request({
+  await http.request({
     url: oracleUrl,
     method: 'put',
     data: file,
     headers: headers
   });
   return policy.objKey;
+};
+
+export const getFileUrl = async (objKey: string) => {
+  // TODO 添加缓存
+  let authUrl = sessionStorage.getItem('authUrl');
+  if (!authUrl) {
+    const data: any = await http.request({
+      url: '/oss/get-auth-url',
+      method: 'get'
+    });
+    authUrl = data.data;
+    sessionStorage.setItem('authUrl', authUrl ?? '');
+  }
+  return authUrl + objKey;
 };
