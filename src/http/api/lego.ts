@@ -158,7 +158,7 @@ export const auditTemplateByAdminAsync: any = (data: any) => {
 // 查询单个模板详细数据
 export const getLegoTemplateInfoByIdAsync: any = (params: { id: any }) => {
   return http.request({
-    url: `/huajian/legoTemplate/legoTemplateInfoById/${params.id}`,
+    url: `/template/get/${params.id}`,
     method: 'get'
   });
 };

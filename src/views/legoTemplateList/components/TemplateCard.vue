@@ -22,7 +22,7 @@
         <el-avatar v-if="cardData.userInfo.avatar" :size="30" :src="cardData.userInfo.avatar" />
         <span class="name">{{ cardData.userInfo.name }}</span>
       </div>
-      <div class="icon-box">
+      <div v-if="false" class="icon-box">
         <svg-icon
           v-config:open_comment
           icon-name="icon-pinglun1"

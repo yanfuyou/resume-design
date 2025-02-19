@@ -114,11 +114,11 @@
       limit: personLimit.value
     };
     const data = await legoUserResumeListAsync(params);
-    if (data.data.status === 200) {
-      legoPersonList.value = data.data.data.list;
-      personTotal.value = data.data.data.page.count;
+    if (data.status === 200) {
+      legoPersonList.value = data.records;
+      personTotal.value = 1;
     } else {
-      ElMessage.error(data.data.message);
+      ElMessage.error(data.message);
     }
   };
   // 查询个人创作历史
@@ -167,7 +167,9 @@
     };
     const data = await getLegoTemplateListByCategoryAsync(params);
     if (data.status === 200) {
-      templateList.value = data.data.map((item: any) => {
+      templateList.value = data.data.records.map((item: any) => {
+        item.previewUrl =
+          'https://maobucv.com:9000/resume/legoTemplatePreview/Snipaste_2023-04-29_11-29-10-1682738967977.png';
         categoryList.value.forEach(
           (categoryItem: { category_label: any; width: string; height: string }) => {
             if (categoryItem.category_label === item.category) {
@@ -178,9 +180,8 @@
         );
         return item;
       });
-      // TODO 分页数据
-      total.value = 0;
-      currentPage.value = 1;
+      total.value = data.data.total;
+      currentPage.value = data.data.currentPage;
       isShowSkeleton.value = false;
     } else {
       ElMessage.error(data.message);
@@ -218,6 +219,9 @@
   };
 
   onMounted(() => {
+    console.log(categoryList.value);
+    console.log(templateList.value);
+
     // ElNotification({
     //   title: '警告',
     //   message: '该功能尚在完善中，您的数据有可能将不被保存~',

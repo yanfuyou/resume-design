@@ -69,6 +69,7 @@ class Request {
 
       config.signal = controller.signal;
 
+      console.log('config', config.headers);
       if (!config.headers) {
         config.headers = {};
         config.headers['Content-Type'] = 'application/json';
@@ -78,7 +79,8 @@ class Request {
         config.data = qs.stringify(config.data);
       }
 
-      if (localStorage.getItem('token')) {
+      if (localStorage.getItem('token') && !config.headers['Authorization']) {
+        console.log('headers', config.headers);
         config.headers.Authorization = localStorage.getItem('token') as string;
       }
 

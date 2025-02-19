@@ -41,14 +41,16 @@
       <el-form-item label="模板预览图:">
         <el-upload
           class="avatar-uploader"
-          :action="uploadAddress()"
-          :headers="{ Authorization: appStore.useTokenStore.token }"
+          action="#"
           :show-file-list="false"
+          :http-request="uploadHandle"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
           <img v-if="ruleForm.previewUrl" :src="ruleForm.previewUrl" class="avatar" />
-          <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+          <el-icon v-else class="avatar-uploader-icon">
+            <Plus />
+          </el-icon>
         </el-upload>
       </el-form-item>
     </el-form>
@@ -71,9 +73,9 @@
   } from '@/http/api/lego';
   import { FormInstance, FormRules, UploadProps } from 'element-plus';
   import appStore from '@/store';
-  import CONFIG from '@/config';
   import { storeToRefs } from 'pinia';
   import { getUuid } from '@/utils/common';
+  import { uploadFile } from '@/http/api/oss';
 
   const { HJSchemaJsonStore } = storeToRefs(appStore.useLegoJsonStore);
 
@@ -139,9 +141,9 @@
   };
   getCategoryList();
 
-  // 上传文件地址
-  const uploadAddress = () => {
-    return CONFIG.serverAddress + '/huajian/upload/file/legoTemplatePreview';
+  const uploadHandle = (options: any) => {
+    console.log('options:', options);
+    uploadFile('template/preview', options.file);
   };
 
   const handleAvatarSuccess: UploadProps['onSuccess'] = (response: {
@@ -219,6 +221,7 @@
   .dialog-footer button:first-child {
     margin-right: 10px;
   }
+
   :deep(.avatar-uploader) {
     .el-upload {
       border: 1px dashed var(--el-border-color);
@@ -242,10 +245,12 @@
       height: 365px;
       text-align: center;
     }
+
     .avatar {
       max-width: 100%;
     }
   }
+
   .how-much {
     margin: 0 5px 0 10px;
   }

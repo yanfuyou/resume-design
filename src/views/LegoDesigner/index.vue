@@ -169,11 +169,11 @@
       id: templateId
     };
     const data = await getLegoTemplateInfoByIdAsync(params);
-    if (data.data.status === 200) {
-      templateInfo.value = data.data.data;
-      const temp = cloneDeep(data.data.data.lego_json);
+    if (data.status === 200) {
+      templateInfo.value = data.data;
+      const temp = cloneDeep(data.data.lego_json);
       temp.id = getUuid();
-      temp.config.title = data.data.data.title;
+      temp.config.title = data.data.title;
       changeHJSchemaJsonData(temp);
     } else {
       ElMessage.error(data.data.message);
