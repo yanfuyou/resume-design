@@ -1,6 +1,6 @@
 interface ITempList {
   ONLINE_LINK: string;
-  _id: string;
+  id: string;
   ID: string;
   NAME: string;
   previewUrl: string;

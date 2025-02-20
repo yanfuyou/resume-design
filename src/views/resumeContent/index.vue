@@ -1,14 +1,16 @@
 <template>
   <div class="resume-content-box">
     <div v-loading="!templateData" class="left-resume-preview">
-      <resume-preview v-if="templateData" :show-line="true"></resume-preview>
+      <!-- <resume-preview v-if="templateData" :show-line="true"></resume-preview> -->
+      <!--  TODO 展示简历预览图 -->
+      <img :src="templateData.previewUrl" />
     </div>
     <div v-loading="!templateData" class="right-box">
       <template v-if="templateData">
         <div class="right-box-tox">
           <!-- 标题 -->
           <div class="right-title">
-            <h1>{{ templateData.template_title }} </h1>
+            <h1>{{ templateData.title }} </h1>
             <img class="right-tag-img" src="@/assets/images/right-tag.svg" alt="支持PDF下载" />
             <span class="tag-tips">支持PDF下载</span>
           </div>
@@ -21,8 +23,8 @@
             </template>
           </div>
           <!-- 使用人数 -->
-          <p class="use-views"
-            >使用人数：<span>{{ templateData.template_views }}</span
+          <p v-if="false" class="use-views"
+            >使用人数：<span>{{ templateData.template_views ?? 10 }}</span
             >人</p
           >
           <div class="use-template-box">
@@ -58,7 +60,7 @@
               class="template-card"
               @click="toResumeDetail(item)"
             >
-              <img :src="item.template_cover" :alt="item.template_title" />
+              <img :src="item.previewUrl" :alt="item.title" />
             </div>
           </div>
         </div>
@@ -70,7 +72,7 @@
 <script setup lang="ts">
   import { getTemplateByIdAsync, templateListAsync } from '@/http/api/createTemplate';
   import appStore from '@/store';
-  import ResumePreview from './components/ResumePreview.vue';
+  // import ResumePreview from './components/ResumePreview.vue';
   import { storeToRefs } from 'pinia';
   import { openGlobalLoading } from '@/utils/common';
   import { useHead } from '@vueuse/head';
@@ -88,14 +90,18 @@
     if (data.status === 200) {
       templateData.value = data.data;
       templateCategoryList.value = {
-        templateStyle: templateData.value.template_style, // 风格
+        templateStyle: templateData.value.category, // 风格
         templateUse: templateData.value.template_use, // 用途
         templateIndustry: templateData.value.template_industry // 行业
       };
-      HJNewJsonStore.value = data.data.template_json;
-      HJNewJsonStore.value.props.title = data.data.template_title;
+      HJNewJsonStore.value = data.data.lego_json;
+      HJNewJsonStore.value.props = {
+        pageName: 'BasePage',
+        screenShot: 'page_1.png',
+        title: data.data.title
+      };
       useHead({
-        title: templateData.value.template_title || title
+        title: templateData.value.title || title
       });
     }
   };
@@ -119,7 +125,11 @@
     resetResumeJson(); // 重置json数据
     selectedModuleId.value = ''; // 重置选中模块
     router.push({
-      path: `/designResume/${templateData.value._id}`
+      path: '/legoDesigner',
+      query: {
+        id: templateData.value.id,
+        category: templateData.value.category
+      }
     });
   };
 
@@ -150,9 +160,9 @@
     };
     const data = await templateListAsync(params);
     if (data.status === 200) {
-      templateList.value = data.data.list;
-      total.value = data.data.page.count;
-      currentPage.value = data.data.page.currentPage;
+      templateList.value = data.data.records;
+      total.value = data.data.count;
+      currentPage.value = data.data.currentPage;
     } else {
       ElMessage.error(data.message);
     }
@@ -162,7 +172,7 @@
   // 跳转至模版详情
   const toResumeDetail = (item: any) => {
     const newpage = router.resolve({
-      path: `/resumedetail/${item._id}`
+      path: `/resumedetail/${item.id}`
     });
     window.open(newpage.href, '_blank');
   };
@@ -174,6 +184,7 @@
     padding: 50px 0;
     display: flex;
     justify-content: space-between;
+
     .left-resume-preview {
       width: 820px;
       background-color: #fff;
@@ -182,6 +193,7 @@
       pointer-events: none;
       overflow: hidden;
     }
+
     .right-box {
       width: 360px;
       min-height: 400px;
@@ -190,18 +202,22 @@
       box-sizing: border-box;
       position: relative;
       flex-shrink: 0;
+
       .right-box-tox {
         border-bottom: 1px solid #e4e4e4;
         padding-bottom: 30px;
+
         .right-title {
           height: 50px;
           display: flex;
           align-items: flex-end;
           padding-bottom: 15px;
           border-bottom: 1px solid #e4e4e4;
+
           h1 {
             font-size: 18px;
           }
+
           .right-tag-img {
             width: 75px;
             height: auto;
@@ -209,6 +225,7 @@
             right: -5px;
             top: -5px;
           }
+
           .tag-tips {
             position: absolute;
             right: -6px;
@@ -220,6 +237,7 @@
             font-size: 11px;
             font-weight: 600;
           }
+
           &::after {
             content: ' ';
             position: absolute;
@@ -229,6 +247,7 @@
             top: 0;
             right: 65px;
           }
+
           &::before {
             content: ' ';
             position: absolute;
@@ -240,33 +259,40 @@
             z-index: 1;
           }
         }
+
         .template-tags {
           display: flex;
           margin: 20px 0;
           flex-wrap: wrap;
+
           .el-tag {
             cursor: pointer;
             transition: all 0.3s;
             margin-right: 15px;
+
             &:hover {
               opacity: 0.7;
             }
           }
         }
+
         .use-views {
           font-size: 14px;
           color: #6d6d6d;
           margin: 15px 0;
           display: flex;
           align-items: center;
+
           span {
             color: #00c091;
             font-weight: bold;
           }
         }
+
         .use-template-box {
           display: flex;
           justify-content: space-between;
+
           .use-template-btn {
             height: 50px;
             width: 100%;
@@ -286,10 +312,12 @@
           font-size: 12px;
           margin-top: 30px;
           line-height: 24px;
+
           .tips {
             font-size: 14px;
             color: #545454;
           }
+
           .tips-content {
             span {
               color: #ffffff;
@@ -300,6 +328,7 @@
               transition: all 0.3s;
               cursor: pointer;
               margin: 0 5px;
+
               &:hover {
                 opacity: 0.8;
               }
@@ -307,16 +336,20 @@
           }
         }
       }
+
       .right-box-bottom {
         padding: 20px 0;
+
         .right-bottom-title {
           display: flex;
           justify-content: space-between;
           align-items: center;
           font-size: 14px;
+
           .title {
             color: #636363;
           }
+
           .more {
             cursor: pointer;
             color: #00c091;
@@ -324,16 +357,19 @@
             align-items: center;
             letter-spacing: 1px;
             transition: all 0.3s;
+
             &:hover {
               opacity: 0.8;
             }
           }
         }
+
         .template-list-box {
           display: flex;
           justify-content: space-between;
           flex-wrap: wrap;
           padding: 15px 0;
+
           .template-card {
             width: 48%;
             height: 206px;
@@ -342,10 +378,12 @@
             transition: all 0.3s;
             border-radius: 4px;
             overflow: hidden;
+
             &:hover {
               opacity: 0.9;
               box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
             }
+
             img {
               width: 100%;
               height: 100%;

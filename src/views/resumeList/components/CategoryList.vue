@@ -83,15 +83,13 @@
   const categoryList = ref<any>([]);
   const getCategoryList = async () => {
     const data = await getTemplateStyleListAsync();
-    if (data.status) {
-      categoryList.value = data.data.map(
-        (item: { category_value: string; category_label: string }) => {
-          return {
-            label: item.category_label,
-            value: item.category_value
-          };
-        }
-      );
+    if (data.status === 200) {
+      categoryList.value = data.data.map((item: { name: string }) => {
+        return {
+          label: item.name,
+          value: item.name
+        };
+      });
     } else {
       ElMessage.error(data.message);
     }

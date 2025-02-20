@@ -51,7 +51,7 @@
     const module = useGetSelectedModule(selectedModuleId.value);
     module.customProps.unfoldModule = true; // 直接展开
     dataConfigScrollToView();
-    console.log('选中的模块ID', selectedModuleId.value);
+    // console.log('选中的模块ID', selectedModuleId.value);
   };
 </script>
 <style lang="scss" scoped>

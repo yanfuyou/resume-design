@@ -32,7 +32,6 @@
   }>();
 
   const { HJNewJsonStore, selectedModuleId } = storeToRefs(appStore.useCreateTemplateStore);
-
   // 返回页面样式
   const pageStyle = useGetPageStyle();
 

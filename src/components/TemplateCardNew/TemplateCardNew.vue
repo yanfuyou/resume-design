@@ -1,7 +1,7 @@
 <template>
   <div class="card-wraper" @mouseover="mouseover" @mouseleave="mouseleave">
     <div class="template-card-box">
-      <img :src="cardData.template_cover" alt="" srcset="" />
+      <img :src="cardData.previewUrl" alt="" srcset="" />
       <!-- 遮罩层 -->
       <div ref="maskLayerRef" class="mask-layer">
         <div class="preview-icon" title="预览" @click="previreImg">
@@ -30,7 +30,7 @@
   </div>
 
   <PreviewImage v-show="dialogVisible" @close="close">
-    <img class="previewImg" :src="cardData.template_cover" alt="" srcset="" />
+    <img class="previewImg" :src="cardData.previewUrl" alt="" srcset="" />
   </PreviewImage>
 </template>
 <script setup lang="ts">

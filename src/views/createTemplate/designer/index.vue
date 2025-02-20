@@ -55,13 +55,18 @@
     const data = await getTemplateByIdAsync(id.value);
     if (data.status === 200) {
       templateInfo.value = data.data;
-      HJNewJsonStore.value = data.data.template_json;
-      HJNewJsonStore.value.props.title = templateInfo.value.template_title;
+      HJNewJsonStore.value = data.data.lego_json;
+      HJNewJsonStore.value.props = HJNewJsonStore.value.props = {
+        pageName: 'BasePage',
+        screenShot: 'page_1.png',
+        title: data.data.title
+      };
+      HJNewJsonStore.value.props.title = templateInfo.value.title;
     } else {
       templateInfo.value = null;
       defaultTemplate();
     }
-    console.log(HJNewJsonStore.value);
+    console.log('HJNewJsonStore.value', HJNewJsonStore.value);
   };
 
   // 默认模版数据
@@ -72,6 +77,7 @@
 
   if (id.value) {
     // 查询模版数据
+    console.log('查询模板数据');
     getTemplateData();
   } else {
     // 默认模版数据
@@ -101,11 +107,13 @@
     display: flex;
     flex-direction: column;
     position: relative;
+
     .content-wrapper {
       width: 100%;
       flex: 1;
       display: flex;
       overflow: auto;
+
       .module-left {
         height: 100%;
         background-color: #fff;
@@ -113,11 +121,13 @@
         max-width: 500px;
         min-width: 300px;
       }
+
       .design-center {
         height: calc(100vh - 100px);
         flex: 1;
         min-width: 970px;
         position: relative;
+
         .center-wrapper {
           width: 100%;
           height: 100%;
@@ -126,6 +136,7 @@
           display: flex;
           justify-content: center;
           align-items: flex-start;
+
           .page-eidtor-box {
             width: 60px;
             min-height: 300px;
@@ -135,6 +146,7 @@
           }
         }
       }
+
       .prop-right {
         height: 100%;
         min-width: 500px;

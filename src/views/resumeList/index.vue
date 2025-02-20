@@ -64,9 +64,9 @@
     };
     const data = await templateListAsync(params);
     if (data.status === 200) {
-      templateList.value = data.data.list;
-      total.value = data.data.page.count;
-      currentPage.value = data.data.page.currentPage;
+      templateList.value = data.data.records;
+      total.value = data.data.count;
+      currentPage.value = data.data.currentPage;
       isShowSkeleton.value = false;
     } else {
       ElMessage.error(data.message);

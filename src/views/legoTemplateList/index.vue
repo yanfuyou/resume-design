@@ -168,8 +168,6 @@
     const data = await getLegoTemplateListByCategoryAsync(params);
     if (data.status === 200) {
       templateList.value = data.data.records.map((item: any) => {
-        item.previewUrl =
-          'https://maobucv.com:9000/resume/legoTemplatePreview/Snipaste_2023-04-29_11-29-10-1682738967977.png';
         categoryList.value.forEach(
           (categoryItem: { category_label: any; width: string; height: string }) => {
             if (categoryItem.category_label === item.category) {

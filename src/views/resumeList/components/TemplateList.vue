@@ -20,7 +20,7 @@
   const toDesign = (item: ITempList) => {
     selectedModuleId.value = ''; // 重置选中模块
     router.push({
-      path: `/resumedetail/${item._id}`
+      path: `/resumedetail/${item.id}`
     });
   };
 </script>

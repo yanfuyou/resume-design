@@ -78,7 +78,6 @@ class Request {
       }
 
       if (localStorage.getItem('token') && !config.headers['Authorization']) {
-        console.log('headers', config.headers);
         config.headers.Authorization = localStorage.getItem('token') as string;
       }
 

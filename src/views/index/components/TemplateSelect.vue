@@ -41,7 +41,7 @@
   const toDesign = (item: any) => {
     selectedModuleId.value = ''; // 重置选中模块
     router.push({
-      path: `/resumedetail/${item._id}`
+      path: `/resumedetail/${item.id}`
     });
   };
 
@@ -63,7 +63,7 @@
     };
     const data = await templateListAsync(params);
     if (data.status === 200) {
-      templateList.value = data.data.list;
+      templateList.value = data.data.records;
     } else {
       ElMessage.error(data.data.message);
     }

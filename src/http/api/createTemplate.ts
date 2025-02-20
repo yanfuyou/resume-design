@@ -3,7 +3,7 @@ import http from '../request';
 // 查询模板分类列表
 export const getTemplateStyleListAsync: any = () => {
   return http.request({
-    url: '/huajian/common/getTemplateCategoryList',
+    url: '/template/categorys',
     method: 'get'
   });
 };
@@ -46,7 +46,7 @@ export const templateAddAsync: any = (data: any) => {
 // 通过id查询模版数据
 export const getTemplateByIdAsync: any = (id: string) => {
   return http.request({
-    url: `/huajian/common/template/${id}`,
+    url: `/template/get/${id}`,
     method: 'get'
   });
 };
@@ -89,7 +89,7 @@ export const saveDraftAsync: any = (data: any) => {
 // 根据模版id查询用户简历
 export const getUsertemplateAsync: any = (id: string) => {
   return http.request({
-    url: `/huajian/createUserTemplate/getUsertemplate/${id}`,
+    url: `/template/get/${id}`,
     method: 'get'
   });
 };

@@ -125,7 +125,6 @@
 
   // url参数
   const { id, templateId, jsonId } = useRoute().query;
-  console.log('url参数', id);
 
   // 查询个人制作数据
   const getPersonLegoJson = async () => {
@@ -133,8 +132,8 @@
       id: id
     };
     const data = await getLegoUserResumeByIdAsync(params);
-    if (data.data.status === 200) {
-      changeHJSchemaJsonData(data.data.data.lego_json);
+    if (data.status === 200) {
+      changeHJSchemaJsonData(data.data.lego_json);
     } else {
       ElMessage.error(data.data.message);
     }
