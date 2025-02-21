@@ -33,7 +33,7 @@ export const publishOnlineResumeAsync: any = (data: any) => {
 // 查询用户的在线简历
 export const getOnlineResumeAsync: any = (id: string) => {
   return http.request({
-    url: `/huajian/common/getOnlineResume/${id}`,
+    url: `/template/get/${id}`,
     method: 'get'
   });
 };

@@ -114,6 +114,7 @@
     getLegoUserResumeByIdAsync,
     getLegoUserTemplateByIdAndJsonIdAsync
   } from '@/http/api/lego';
+  import { closeGlobalLoading } from '@/utils/common';
 
   // 设计区刷新id
   const { refreshUuid } = storeToRefs(appStore.useUuidStore);
@@ -137,6 +138,7 @@
     } else {
       ElMessage.error(data.data.message);
     }
+    closeGlobalLoading();
   };
 
   // 查询个人创作的模板数据--编辑模板
@@ -159,6 +161,7 @@
     } else {
       ElMessage.error(data.data.message);
     }
+    closeGlobalLoading();
   };
 
   // 查询模板数据
@@ -177,6 +180,7 @@
     } else {
       ElMessage.error(data.data.message);
     }
+    closeGlobalLoading();
   };
 
   if (templateId) {
@@ -192,13 +196,10 @@
     // 新的空白页
     resetHJSchemaJsonData();
     HJSchemaJsonStore.value.id = getUuid();
-  }
-  if (id) {
-    // 发送请求查找
+    closeGlobalLoading();
   }
 
   const { pushComponent } = appStore.useLegoJsonStore;
-  console.log('页面初始化JSON', HJSchemaJsonStore);
 
   onMounted(async () => {
     window.addEventListener('mousedown', handleKeepActive); // 监听页面鼠标点击事件

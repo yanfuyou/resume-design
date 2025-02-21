@@ -24,10 +24,10 @@
         id: id
       };
       const data = await getLegoUserResumeByIdAsync(params);
-      if (data.data.status === 200) {
-        changeHJSchemaJsonData(data.data.data.lego_json);
+      if (data.status === 200) {
+        changeHJSchemaJsonData(data.data.lego_json);
       } else {
-        ElMessage.error(data.data.message);
+        ElMessage.error(data.message);
       }
       setUuid();
     }

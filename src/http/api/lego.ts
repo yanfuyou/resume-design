@@ -21,7 +21,7 @@ export const legoUserResumeListAsync: any = (params: any) => {
 // 用户查询个人单个积木数据
 export const getLegoUserResumeByIdAsync: any = (params: { id: any }) => {
   return http.request({
-    url: `/template/get/${params.id}`,
+    url: `/resume/get?id=${params.id}`,
     method: 'get'
   });
 };

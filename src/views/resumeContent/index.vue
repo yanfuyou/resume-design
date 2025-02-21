@@ -3,7 +3,7 @@
     <div v-loading="!templateData" class="left-resume-preview">
       <!-- <resume-preview v-if="templateData" :show-line="true"></resume-preview> -->
       <!--  TODO 展示简历预览图 -->
-      <img :src="templateData.previewUrl" />
+      <img v-if="templateData" :src="templateData.previewUrl" />
     </div>
     <div v-loading="!templateData" class="right-box">
       <template v-if="templateData">
@@ -127,7 +127,7 @@
     router.push({
       path: '/legoDesigner',
       query: {
-        id: templateData.value.id,
+        templateId: templateData.value.id,
         category: templateData.value.category
       }
     });

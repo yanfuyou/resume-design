@@ -142,7 +142,6 @@
 
   // 获取用户会员信息
   const { membershipInfo } = storeToRefs(appStore.useMembershipStore);
-  console.log('用户会员信息', membershipInfo.value);
 
   const nameColor = computed(() => {
     return props.fontColor ? '#2ddd9d' : 'green';

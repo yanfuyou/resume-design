@@ -40,17 +40,12 @@
           <span class="icon-tips">分享</span>
         </div>
       </el-tooltip>
-      <el-tooltip
-        v-if="templateId && templateInfo"
-        effect="dark"
-        content="快来一起参与评论吧！"
-        placement="bottom"
-      >
+      <!-- <el-tooltip v-if="templateId && templateInfo" effect="dark" content="快来一起参与评论吧！" placement="bottom">
         <div class="icon-box" @click="publishComment">
           <svg-icon icon-name="icon-pinglun" color="#555" size="18px"></svg-icon>
           <span class="icon-tips">评论({{ templateInfo.commentCount }})</span>
         </div>
-      </el-tooltip>
+      </el-tooltip> -->
       <el-tooltip
         v-if="!templateId"
         effect="dark"
@@ -93,23 +88,6 @@
     :percentage-num="percentage"
     @cancle="cancleProgress"
   ></process-bar-dialog>
-
-  <!-- 评论抽屉 -->
-  <el-drawer
-    v-model="commentDrawer"
-    append-to-body
-    class="lego-comment-box"
-    modal-class="lego-comment-box-modal"
-    :show-close="false"
-    direction="rtl"
-  >
-    <comment-com
-      v-config:open_comment
-      :comment-type-id="templateId"
-      comment-type="legoTemplate"
-      width="100%"
-    ></comment-com>
-  </el-drawer>
 </template>
 <script lang="ts" setup>
   import appStore from '@/store';
@@ -267,13 +245,13 @@
           lego_json: HJSchemaJsonStore.value
         };
         const data = await legoUserResumeAsync(params);
-        if (data.data.status === 200) {
+        if (data.status === 200) {
           const time = moment(new Date()).format('YYYY.MM.DD HH:mm:ss');
           draftTips.value = `已保存草稿  ${time}`;
-          _id.value = data.data.data._id;
+          _id.value = data.data;
           ElMessage.success('保存成功');
         } else {
-          ElMessage.error(data.data.message);
+          ElMessage.error(data.message);
         }
         isCanSave.value = true;
       } else {
@@ -293,7 +271,6 @@
         // 重置JSON
         const id = HJSchemaJsonStore.value.id;
         resetHJSchemaJsonData(id);
-        console.log('HJSchemaJsonStore', HJSchemaJsonStore);
         // 重置选中状态
         resetSelectWidget();
         setUuid();
@@ -302,7 +279,15 @@
   };
 
   // 发布公开简历
-  const publishOnlineResume = () => {};
+  const publishOnlineResume = async () => {
+    await saveDraft();
+    router.push({
+      path: '/legoPrintPdfPreview',
+      query: {
+        id: _id.value
+      }
+    });
+  };
 
   // 离开页面之前
   onBeforeUnmount(async () => {
@@ -314,15 +299,9 @@
     setUuid();
   });
 
-  // 打开评论弹窗
-  const commentDrawer = ref<boolean>(false);
-  const publishComment = () => {
-    commentDrawer.value = true;
-  };
-
   // 监听路由离开
   onBeforeRouteLeave((to, from, next) => {
-    if (to.path === '/postWorkSuccess') {
+    if (to.path === '/postWorkSuccess' || to.path === '/legoPrintPdfPreview') {
       next();
       return true;
     }
@@ -365,6 +344,7 @@
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
+
     .nav-left {
       width: 300px;
       height: 100%;
@@ -373,11 +353,13 @@
       user-select: none;
       padding: 0 0 0 40px;
     }
+
     .nav-right {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       padding-right: 30px;
+
       .icon-box {
         display: flex;
         flex-direction: column;
@@ -388,18 +370,22 @@
         padding: 0 15px;
         height: 100%;
         transition: all 0.3s;
+
         &:hover {
           background-color: rgba($color: #74a274, $alpha: 0.1);
           color: #74a274;
         }
+
         .icon-tips {
           font-size: 12px;
           margin-top: 8px;
         }
       }
+
       .icon-download {
         background-color: rgba($color: #74a274, $alpha: 1);
         color: #fff;
+
         &:hover {
           background-color: rgba($color: #74a274, $alpha: 0.9);
           color: #fff;
@@ -411,16 +397,21 @@
 <style lang="scss">
   .lego-comment-box-modal {
     display: flex;
+
     .lego-comment-box {
       .el-drawer__header {
         display: none;
       }
+
       .el-drawer__body {
         padding: 0;
+
         .comment-view {
           margin: 0 0 20px 0;
+
           .u-comment {
             padding: 0 20px;
+
             .comment-form {
               padding: 0;
             }

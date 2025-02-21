@@ -15,6 +15,7 @@ export const exportLegoPdf = async (id?: string) => {
     height: HJSchemaJsonStore.css.height + 'px',
     integralPayGoodsId: id
   };
+  // TODO 后台使用无头浏览器生成pdf
   const pdfData = await getLegoResumePdfAsync(params);
   if (pdfData.status) {
     ElMessage.error('网络过慢，请求超时，请重新尝试导出');

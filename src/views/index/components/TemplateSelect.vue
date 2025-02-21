@@ -73,7 +73,7 @@
   // 点击查看更多
   const seeMore = () => {
     router.push({
-      name: 'Resume'
+      path: '/legoTemplateList'
     });
   };
 

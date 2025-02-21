@@ -3,19 +3,6 @@ import { buildTree } from '@/utils/common';
 import { defineStore } from 'pinia';
 const menuList = [
   {
-    _id: '666c39e4794cb509aa0aa79c',
-    parentId: '',
-    iconfont: '',
-    name: 'Template',
-    title: '在线制作',
-    path: '/resume',
-    index: 1,
-    status: 1,
-    createDate: '2024-06-14T12:39:00.650Z',
-    updateDate: '2024-12-04T10:03:46.798Z',
-    __v: 0
-  },
-  {
     _id: '666c3a7b794cb509aa0aa7ba',
     parentId: '666c3a13794cb509aa0aa7a4',
     iconfont: '',
@@ -33,7 +20,7 @@ const menuList = [
     parentId: '',
     iconfont: '',
     name: 'LegoTemplateList',
-    title: '积木创作',
+    title: '自由创作',
     path: '/legoTemplateList',
     index: 2,
     status: 1,
@@ -83,7 +70,6 @@ export const useIndexMenuStore = defineStore('indexMenuStore', () => {
   // 查询首页导航信息
   async function getIndexMenuList() {
     const treeData = buildTree(menuList);
-    console.log('首页导航菜单', treeData);
     saveIndexMenu(treeData);
   }
 

@@ -97,9 +97,9 @@
   // 查询用户数据
   const getUserTemplate = async () => {
     const data = await getUsertemplateAsync(route.params.id);
-    if (data.data.status === 200) {
-      HJNewJsonStore.value = data.data.data.template_json;
-      HJNewJsonStore.value.props.title = data.data.data.template_json.config.title;
+    if (data.status === 200) {
+      HJNewJsonStore.value = data.data.lego_json;
+      HJNewJsonStore.value.props.title = data.data.lego_json.config.title;
       useHead({
         title: HJNewJsonStore.value.props.title || title
       });

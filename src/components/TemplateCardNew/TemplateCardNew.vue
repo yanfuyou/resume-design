@@ -14,17 +14,12 @@
     <div class="viewer-box">
       <!-- 模板作者 -->
       <div class="create-user">
-        <span class="name">{{ cardData.template_title }}</span>
+        <el-avatar v-if="cardData.userInfo.avatar" :size="30" :src="cardData.userInfo.avatar" />
+        <span class="name">{{ cardData.userInfo.name }}</span>
       </div>
       <div class="icon-box">
-        <svg-icon
-          v-config:open_comment
-          icon-name="icon-pinglun1"
-          color="#a3abb1"
-          size="19px"
-        ></svg-icon>
         <svg-icon icon-name="icon-jibenziliao" color="#a3abb1" size="19px"></svg-icon>
-        <span class="number">{{ cardData.template_views }}</span>
+        <span class="number">{{ cardData.template_views ?? 0 }}</span>
       </div>
     </div>
   </div>

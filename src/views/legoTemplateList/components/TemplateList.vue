@@ -53,12 +53,19 @@
   const router = useRouter();
   const toDesignDetail = (cardData: { id: any; category: any }) => {
     router.push({
-      path: '/legoDesigner',
-      query: {
-        templateId: cardData.id,
-        category: cardData.category
-      }
+      path: `/resumedetail/${cardData.id}`
+      // query: {
+      //   templateId: cardData.id,
+      //   category: cardData.category
+      // }
     });
+    // router.push({
+    //   path: '/legoDesigner',
+    //   query: {
+    //     templateId: cardData.id,
+    //     category: cardData.category
+    //   }
+    // });
   };
 </script>
 <style lang="scss" scoped>

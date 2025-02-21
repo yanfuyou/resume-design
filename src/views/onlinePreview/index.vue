@@ -39,7 +39,7 @@
   const getOnlineResume = async () => {
     const data = await getOnlineResumeAsync(route.params.id);
     if (data.status === 200) {
-      TEMPLATE_JSON = data.data as IDESIGNJSON;
+      TEMPLATE_JSON = data.data.lego_json as IDESIGNJSON;
       changeResumeJsonData(TEMPLATE_JSON); // 更改store的数据
       setUuid();
     } else {

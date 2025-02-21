@@ -275,8 +275,6 @@ export const buildTree = (items: any) => {
     (item: any) =>
       item._id != '666c3c0a794cb509aa0aa81a' && item.parentId != '666c3c0a794cb509aa0aa81a'
   );
-
-  console.log('items', items);
   items.forEach((item: any) => (map[item._id] = { ...item, children: [] }));
 
   // 创建一个结果数组，存放最终的树形结构

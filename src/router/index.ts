@@ -18,7 +18,6 @@ const AccountSetting = () => import('@/views/person/accountSetting/index.vue');
 const MyComment = () => import('@/views/person/myComment/index.vue');
 const MyResume = () => import('@/views/person/myResume/index.vue');
 const ResumePreview = () => import('@/views/createTemplate/previewer/index.vue');
-const Resume = () => import('@/views/resumeList/index.vue');
 const ResumeContent = () => import('@/views/resumeContent/index.vue');
 const Word = () => import('@/views/word/index.vue');
 const WordPreview = () => import('@/views/wordPreview/index.vue');
@@ -78,7 +77,6 @@ const PublishSuccess = () =>
   import('@/views/admin/ArticleManage/AddArticle/pages/publishSuccess.vue');
 const PayList = () => import('@/views/admin/payStats/payList/index.vue');
 const YipayList = () => import('@/views/admin/payStats/yipayList/index.vue');
-const ArticleDetail = () => import('@/views/deployDoc/pages/articleDetails.vue');
 const IntegralList = () => import('@/views/admin/integralManage/IntegralList/index.vue');
 const IntegralPayConfig = () => import('@/views/admin/integralManage/IntegralPayConfig/index.vue');
 const AliPayTradeList = () => import('@/views/admin/integralManage/AliPayTradeList/index.vue');
@@ -239,18 +237,6 @@ const routes: Array<RouteRecordRaw> = [
       requireAdmin: false
     },
     component: ResetPassword
-  },
-  {
-    path: '/resume',
-    name: 'Resume',
-    meta: {
-      title: '在线制作模版列表',
-      keepAlive: true,
-      isShowComNav: true,
-      requireLogin: false,
-      requireAdmin: false
-    },
-    component: Resume
   },
   {
     path: '/resumedetail/:id',
@@ -562,18 +548,6 @@ const routes: Array<RouteRecordRaw> = [
       requireAdmin: false
     },
     component: OnlinePreview
-  },
-  {
-    path: '/articleDetail',
-    name: 'ArticleDetail',
-    meta: {
-      title: '文章详情',
-      keepAlive: true,
-      isShowComNav: true,
-      requireLogin: true,
-      requireAdmin: false
-    },
-    component: ArticleDetail
   },
 
   // 管理员界面
@@ -1119,7 +1093,6 @@ const router = createRouter({
 // 全局守卫：登录拦截 本地没有存token,请重新登录
 router.beforeEach(async (to, from, next) => {
   // 设置标题、描述、关键词
-  console.log('路由跳转 to:', to);
   useHead({
     title: (to.meta.title as string) || title,
     meta: [
