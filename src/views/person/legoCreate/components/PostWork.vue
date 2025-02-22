@@ -30,6 +30,7 @@
   import { deleteLegoUserTemplateAsync, legoUserTemplateListAsync } from '@/http/api/lego';
   import PostCard from './PostWorkCard.vue';
   import NoDataVue from '@/components/NoData/NoData.vue';
+  import appStore from '@/store';
 
   // 查询积木创作模板列表
   const legoCreateList = ref<Array<any>>([]);
@@ -40,14 +41,16 @@
   const isShowSkeleton = ref<boolean>(true);
   const getLegoUserTemplateList = async () => {
     let params = {
-      page: page.value,
-      limit: limit.value
+      currentPage: page.value,
+      pageSize: limit.value,
+      uid: appStore.useUserInfoStore.userInfo.id,
+      states: []
     };
     const data = await legoUserTemplateListAsync(params);
-    if (data.data.status === 200) {
-      legoCreateList.value = data.data.data.list;
-      total.value = data.data.data.page.count;
-      currentPage.value = data.data.data.page.currentPage;
+    if (data.status === 200) {
+      legoCreateList.value = data.data.records;
+      total.value = data.data.total;
+      currentPage.value = data.data.currentPage;
       isShowSkeleton.value = false;
     } else {
       isShowSkeleton.value = false;
@@ -82,6 +85,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+
       & :last-child:nth-child(3n - 1) {
         margin-right: calc(260px + 15px);
       }

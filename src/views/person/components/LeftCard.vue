@@ -11,8 +11,8 @@
         :before-upload="beforeAvatarUpload"
       >
         <img
-          v-if="appStore.useUserInfoStore.userInfo.photos.profilePic.url"
-          :src="appStore.useUserInfoStore.userInfo.photos.profilePic.url"
+          v-if="appStore.useUserInfoStore.userInfo.avatar"
+          :src="appStore.useUserInfoStore.userInfo.avatar"
           class="avatar"
         />
         <el-avatar v-else :size="70">
@@ -48,12 +48,12 @@
       avatar: response.data.data.fileUrl
     };
     const data = await updateUserAvatarAsync(params);
-    if (data.data.status === 200) {
+    if (data.status === 200) {
       ElMessage.success('更新成功');
       // 更新用户信息
       getAndUpdateUserInfo();
     } else {
-      ElMessage.error(data.data.message);
+      ElMessage.error(data.message);
     }
   };
 

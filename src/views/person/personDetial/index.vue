@@ -87,7 +87,6 @@
 
   // 获取用户会员信息
   const { membershipInfo } = storeToRefs(appStore.useMembershipStore);
-  console.log('用户会员信息', membershipInfo.value);
 
   // 点击编辑
   const isEdit = ref<boolean>(false);

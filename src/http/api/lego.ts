@@ -12,7 +12,7 @@ export const legoUserResumeAsync: any = (data: any) => {
 // 查询个人积木创作列表
 export const legoUserResumeListAsync: any = (params: any) => {
   return http.request({
-    url: '/template/user-templates',
+    url: '/resume/page',
     method: 'get',
     params: params
   });
@@ -89,7 +89,7 @@ export const legoTemplateUpdateAsync: any = (data: any) => {
 // 用户查询个人创建的作品模板列表
 export const legoUserTemplateListAsync: any = (params: any) => {
   return http.request({
-    url: '/huajian/legoTemplate/legoUserTemplateList',
+    url: '/template/page',
     method: 'get',
     params: params
   });
@@ -123,7 +123,7 @@ export const getLegoTemplateCategoryListAsync: any = () => {
 // 无需权限根据分类查询模板列表
 export const getLegoTemplateListByCategoryAsync: any = (params: any) => {
   return http.request({
-    url: '/template/list',
+    url: '/template/page',
     method: 'get',
     params: params
   });

@@ -22,9 +22,7 @@
     legoPersonList: any;
     categoryList: any;
   }>();
-  onMounted(() => {
-    console.log('onMounted', props.templateList);
-  });
+  onMounted(() => {});
   // 卡片宽度
   const cardWidth = computed(() => {
     let width = '';

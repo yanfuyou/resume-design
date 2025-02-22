@@ -109,11 +109,7 @@
   import { getUuid } from '@/utils/common';
   import { cloneDeep } from 'lodash';
   import { HJSchema } from './schema/index';
-  import {
-    getLegoTemplateInfoByIdAsync,
-    getLegoUserResumeByIdAsync,
-    getLegoUserTemplateByIdAndJsonIdAsync
-  } from '@/http/api/lego';
+  import { getLegoTemplateInfoByIdAsync, getLegoUserResumeByIdAsync } from '@/http/api/lego';
   import { closeGlobalLoading } from '@/utils/common';
 
   // 设计区刷新id
@@ -125,7 +121,7 @@
   const { changeHJSchemaJsonData, resetHJSchemaJsonData } = appStore.useLegoJsonStore;
 
   // url参数
-  const { id, templateId, jsonId } = useRoute().query;
+  let { id, templateId, oldTemplateId } = useRoute().query;
 
   // 查询个人制作数据
   const getPersonLegoJson = async () => {
@@ -143,27 +139,6 @@
 
   // 查询个人创作的模板数据--编辑模板
   const postWorkInfo = ref<any>(null);
-  const getLegoUserTemplateByIdAndJsonId = async () => {
-    const params = {
-      id: id,
-      jsonId: jsonId
-    };
-    const data = await getLegoUserTemplateByIdAndJsonIdAsync(params);
-    if (data.data.status === 200) {
-      postWorkInfo.value = {
-        _id: data.data.data._id,
-        category: data.data.data.category,
-        how_much: data.data.data.how_much,
-        previewUrl: data.data.data.previewUrl,
-        title: data.data.data.title
-      };
-      changeHJSchemaJsonData(data.data.data.lego_json);
-    } else {
-      ElMessage.error(data.data.message);
-    }
-    closeGlobalLoading();
-  };
-
   // 查询模板数据
   const templateInfo = ref<any>(null); // 模板的其他相关信息
   const getTemplate = async () => {
@@ -177,6 +152,15 @@
       temp.id = getUuid();
       temp.config.title = data.data.title;
       changeHJSchemaJsonData(temp);
+      if (oldTemplateId) {
+        postWorkInfo.value = {
+          _id: data.data.id,
+          category: data.data.category,
+          how_much: 0,
+          previewUrl: data.data.previewUrl,
+          title: data.data.title
+        };
+      }
     } else {
       ElMessage.error(data.data.message);
     }
@@ -186,12 +170,12 @@
   if (templateId) {
     // 查找模板数据
     getTemplate();
-  } else if (id && jsonId) {
-    // 编辑模板
-    getLegoUserTemplateByIdAndJsonId();
   } else if (id) {
     // 查询用户个人模板数据
     getPersonLegoJson();
+  } else if (oldTemplateId) {
+    templateId = oldTemplateId;
+    getTemplate();
   } else {
     // 新的空白页
     resetHJSchemaJsonData();
@@ -558,12 +542,15 @@
     width: 6px;
     height: 6px;
   }
+
   .lego-designer-box {
     height: 100vh;
     min-width: 1200px;
+
     .main-designer-box {
       display: flex;
       justify-content: space-between;
+
       .designer-box {
         flex: 1;
         overflow: auto;
@@ -572,10 +559,12 @@
         min-width: 850px;
         display: flex;
         flex-direction: column;
+
         .design-bottom-box {
           padding: 15px;
           overflow: auto;
           flex: 1;
+
           .designer {
             display: grid;
             position: relative;
@@ -591,30 +580,37 @@
               box-shadow: 0 2px 8px rgba(14, 19, 24, 0.07);
               border-radius: 2px;
               position: relative;
+
               &::after {
                 /*使用before 选择器在被选元素的内容前面插入内容。*/
                 width: 100%;
-                height: 100%; /*设置为全屏背景模式*/
+                height: 100%;
+                /*设置为全屏背景模式*/
                 background: v-bind('HJSchemaJsonStore.css.background');
                 background-image: v-bind('backgroundImage');
                 background-size: 100% 100%;
-                position: absolute; /*图片定位*/
+                position: absolute;
+                /*图片定位*/
                 top: 0;
                 left: 0;
                 content: '';
-                z-index: -1; /*设置该标签等级，让其始终位于最上层*/
+                z-index: -1;
+                /*设置该标签等级，让其始终位于最上层*/
                 filter: v-bind('pagesOpacity');
               }
+
               .drag-component {
                 cursor: move;
               }
             }
           }
+
           .add-page-box {
             height: 60px;
             display: flex;
             justify-content: center;
             zoom: v-bind('sizeCenter');
+
             .add-page-btn {
               width: 100px;
               height: 30px;
@@ -640,6 +636,7 @@
               transition: all 0.3s;
               cursor: pointer;
               user-select: none;
+
               &:hover {
                 opacity: 0.8;
               }
@@ -654,12 +651,14 @@
   .v-contextmenu {
     z-index: 10001;
     border: none;
+
     .v-contextmenu-inner {
       padding: 0;
       width: 100px;
       border-radius: 5px;
       overflow: hidden;
       border: none;
+
       .v-contextmenu-item {
         padding: 0;
         height: 100%;
@@ -670,6 +669,7 @@
         padding: 10px 5px;
         border: none;
       }
+
       .v-contextmenu-item--hover {
         color: #fff;
         background-image: linear-gradient(to right, #2ddd9d, #1cc7cf);

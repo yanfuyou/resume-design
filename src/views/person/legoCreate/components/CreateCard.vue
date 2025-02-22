@@ -14,6 +14,7 @@
   import { ref } from 'vue';
   import { ElMessageBox } from 'element-plus';
   import 'element-plus/es/components/message-box/style/index';
+  import { openGlobalLoading } from '@/utils/common';
   const props = defineProps<{
     cardData: {
       is_online: boolean;
@@ -21,7 +22,8 @@
       name: string;
       online_link: string;
       previewUrl: string;
-      _id: string;
+      id: string;
+      category: string;
     };
   }>();
   const emit = defineEmits(['delete']);
@@ -38,11 +40,12 @@
   // 点击继续制作
   const router = useRouter();
   const toDesign = () => {
-    console.log(props.cardData);
+    openGlobalLoading();
     router.push({
       path: '/legoDesigner',
       query: {
-        id: props.cardData._id
+        templateId: props.cardData.id,
+        category: props.cardData.category
       }
     });
   };
@@ -55,7 +58,7 @@
       type: 'warning'
     })
       .then(async () => {
-        emit('delete', props.cardData._id);
+        emit('delete', props.cardData.id);
       })
       .catch(() => {});
   };
@@ -74,13 +77,17 @@
     margin-bottom: 30px;
     box-shadow: 5px 5px 5px 0px rgba(165, 128, 128, 0.2);
     border: 1px solid #eee;
+
     &:hover {
       transition: all 0.1s;
       box-shadow: 5px 5px 5px 0px rgba(175, 50, 50, 0.2);
     }
+
     img {
       width: 100%;
+      height: 100%;
     }
+
     .mask-layer {
       height: 100%;
       width: 100%;
@@ -92,6 +99,7 @@
       transition: all 0.3s;
       z-index: 1;
       transition: all 0.3s;
+
       .delete-box {
         position: absolute;
         top: 5px;
@@ -105,10 +113,12 @@
         background-color: #2cbd99;
         cursor: pointer;
         transition: all 0.3s;
+
         &:hover {
           background-color: rgba(#42aa90, 0.7);
         }
       }
+
       .design-button {
         width: 100px;
         height: 30px;
@@ -125,12 +135,14 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+
         &:hover {
           background-color: rgba(#42aa90, 0.7);
         }
       }
     }
   }
+
   .previewImg {
     height: 90vh;
   }

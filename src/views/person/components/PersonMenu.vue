@@ -27,12 +27,12 @@
       title: '个人信息',
       path: '/person/personDetail'
     },
-    {
-      index: 'PersonIntegral',
-      iconfont: 'icon-jifen',
-      title: '我的资产',
-      path: '/person/personIntegral'
-    },
+    // {
+    //   index: 'PersonIntegral',
+    //   iconfont: 'icon-jifen',
+    //   title: '我的资产',
+    //   path: '/person/personIntegral'
+    // },
     {
       index: 'AccountSetting',
       iconfont: 'icon-shezhi',
@@ -48,7 +48,7 @@
     {
       index: 'LegoCreate',
       iconfont: 'icon-jimu',
-      title: '积木创作',
+      title: '自由创作',
       path: '/person/legoCreate'
     },
     {

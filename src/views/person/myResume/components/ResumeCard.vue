@@ -1,6 +1,6 @@
 <template>
   <div class="template-card-box" @mouseover="mouseover" @mouseleave="mouseleave">
-    <img :src="type === 'old' ? cardData.previewUrl : cardData.template_cover" alt="" srcset="" />
+    <img :src="cardData.previewUrl" alt="" srcset="" />
     <!-- 遮罩层 -->
     <div v-show="isShowLayer" class="mask-layer">
       <div class="delete-box" @click="deleteUserResume">
@@ -38,22 +38,16 @@
   const { selectedModuleId } = storeToRefs(appStore.useCreateTemplateStore);
   const router = useRouter();
   const toDesign = () => {
-    console.log(props.cardData);
-    if (props.type === 'old') {
-      router.push({
-        path: '/designer',
-        query: {
-          id: props.cardData.ID
-        }
-      });
-    } else {
-      openGlobalLoading(); // 等待动画层
-      resetResumeJson(); // 重置json数据
-      selectedModuleId.value = ''; // 重置选中模块
-      router.push({
-        path: `/designResume/${props.cardData.template_id}`
-      });
-    }
+    openGlobalLoading(); // 等待动画层
+    resetResumeJson(); // 重置json数据
+    selectedModuleId.value = ''; // 重置选中模块
+    router.push({
+      path: '/legoDesigner',
+      query: {
+        id: props.cardData.id,
+        category: props.cardData.category
+      }
+    });
   };
 
   // 点击删除简历
@@ -86,13 +80,16 @@
     transition: all 0.3s;
     margin-bottom: 30px;
     box-shadow: 5px 5px 5px 0px rgba(165, 128, 128, 0.2);
+
     &:hover {
       transition: all 0.1s;
       box-shadow: 5px 5px 5px 0px rgba(175, 50, 50, 0.2);
     }
+
     img {
       width: 100%;
     }
+
     .mask-layer {
       height: 100%;
       width: 100%;
@@ -104,6 +101,7 @@
       transition: all 0.3s;
       z-index: 1;
       transition: all 0.3s;
+
       .delete-box {
         position: absolute;
         top: 5px;
@@ -117,10 +115,12 @@
         background-color: #2cbd99;
         cursor: pointer;
         transition: all 0.3s;
+
         &:hover {
           background-color: rgba(#42aa90, 0.7);
         }
       }
+
       .design-button {
         width: 100px;
         height: 30px;
@@ -137,12 +137,14 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+
         &:hover {
           background-color: rgba(#42aa90, 0.7);
         }
       }
     }
   }
+
   .previewImg {
     height: 90vh;
   }

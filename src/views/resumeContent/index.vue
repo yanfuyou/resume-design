@@ -110,11 +110,13 @@
   // 点击标签
   const router = useRouter();
   const handleClickTag = (key: string, value: any) => {
-    console.log(key, value);
+    if (value) {
+      console.log(value);
+    }
     let query: any = {};
-    query[value] = key;
+    query['category'] = key;
     router.push({
-      path: '/resume',
+      path: '/legoTemplateList',
       query
     });
   };
@@ -135,15 +137,16 @@
 
   // 跳转至模版商城
   const toWordTemplate = () => {
-    router.push({
-      path: '/word'
-    });
+    ElMessage.info('开发中...');
+    // router.push({
+    //   path: '/word'
+    // });
   };
 
   // 查看更多模版
   const toMore = () => {
     router.push({
-      path: '/resume'
+      path: '/legoTemplateList'
     });
   };
 

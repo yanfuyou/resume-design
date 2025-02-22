@@ -184,7 +184,7 @@
         } else {
           // 更新
           let params = {
-            _id: props.postWorkInfo._id,
+            id: props.postWorkInfo._id,
             lego_json: HJSchemaJsonStore.value,
             previewUrl: ruleForm.previewUrl,
             category: ruleForm.category,
@@ -241,6 +241,7 @@
 
     .avatar {
       max-width: 100%;
+      height: 100%;
     }
   }
 

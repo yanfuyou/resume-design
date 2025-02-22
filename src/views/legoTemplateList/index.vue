@@ -40,6 +40,7 @@
         <common-loading></common-loading>
       </div>
       <!-- 分页组件 -->
+      <!-- TODO 分页信息需要重新设置 -->
       <Pagination
         v-if="templateList.length && templateList.length < total"
         :total="total"
@@ -62,7 +63,7 @@
   import CommonLoading from '@/components/CommonLoading/CommonLoading.vue';
   import TemplateListVue from './components/TemplateList.vue';
   import LatestDesign from './components/LatestDesign.vue';
-
+  import appStore from '@/store';
   // 是否显示骨架
   const isShowSkeleton = ref<boolean>(true);
 
@@ -111,7 +112,8 @@
   const getLegoUserResumeList = async () => {
     let params = {
       page: 1,
-      limit: personLimit.value
+      limit: personLimit.value,
+      uid: appStore.useUserInfoStore.userInfo.id
     };
     const data = await legoUserResumeListAsync(params);
     if (data.status === 200) {
@@ -160,8 +162,8 @@
   const getTemplateList = async () => {
     isShowSkeleton.value = true;
     let params = {
-      page: page.value,
-      limit: limit.value,
+      currentPage: page.value,
+      pageSize: limit.value,
       category: category.value === '全部' ? '' : category.value,
       sort: sort.value
     };
@@ -217,9 +219,6 @@
   };
 
   onMounted(() => {
-    console.log(categoryList.value);
-    console.log(templateList.value);
-
     // ElNotification({
     //   title: '警告',
     //   message: '该功能尚在完善中，您的数据有可能将不被保存~',

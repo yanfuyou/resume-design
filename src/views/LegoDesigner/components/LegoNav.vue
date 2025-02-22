@@ -16,7 +16,7 @@
           <span class="icon-tips">预览</span>
         </div>
       </el-tooltip>
-      <el-tooltip effect="dark" content="保存为草稿" placement="bottom">
+      <el-tooltip effect="dark" content="保存为简历" placement="bottom">
         <div class="icon-box" @click="saveDraft">
           <svg-icon icon-name="icon-caogaoxiang1" color="#555" size="17px"></svg-icon>
           <span class="icon-tips">保存</span>
@@ -40,12 +40,6 @@
           <span class="icon-tips">分享</span>
         </div>
       </el-tooltip>
-      <!-- <el-tooltip v-if="templateId && templateInfo" effect="dark" content="快来一起参与评论吧！" placement="bottom">
-        <div class="icon-box" @click="publishComment">
-          <svg-icon icon-name="icon-pinglun" color="#555" size="18px"></svg-icon>
-          <span class="icon-tips">评论({{ templateInfo.commentCount }})</span>
-        </div>
-      </el-tooltip> -->
       <el-tooltip
         v-if="!templateId"
         effect="dark"
@@ -112,7 +106,7 @@
   const { resetHJSchemaJsonData } = appStore.useLegoJsonStore;
   const { setUuid } = appStore.useRefreshStore;
   const { resetSelectWidget } = appStore.useLegoSelectWidgetStore;
-  const { templateId, category } = useRoute().query;
+  const { category, templateId } = useRoute().query;
 
   const props = defineProps<{
     pagesRefs: any;

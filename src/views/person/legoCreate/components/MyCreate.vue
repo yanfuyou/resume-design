@@ -27,9 +27,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { deleteLegoUserResumeAsync, legoUserResumeListAsync } from '@/http/api/lego';
+  import { deleteLegoUserTemplateAsync, legoUserTemplateListAsync } from '@/http/api/lego';
+
   import CreateCard from './CreateCard.vue';
   import NoDataVue from '@/components/NoData/NoData.vue';
+  import appStore from '@/store';
 
   // 查询积木创作列表
   const legoCreateList = ref<Array<any>>([]);
@@ -38,28 +40,30 @@
   const total = ref<number>(0);
   const currentPage = ref<number>(1);
   const isShowSkeleton = ref<boolean>(true);
-  const getLegoUserResumeList = async () => {
+  const getLegoUserTemplateList = async () => {
     let params = {
-      page: page.value,
-      limit: limit.value
+      currentPage: page.value,
+      pageSize: limit.value,
+      uid: appStore.useUserInfoStore.userInfo.id,
+      states: [0, 1]
     };
-    const data = await legoUserResumeListAsync(params);
-    if (data.data.status === 200) {
-      legoCreateList.value = data.data.data.list;
-      total.value = data.data.data.page.count;
-      currentPage.value = data.data.data.page.currentPage;
+    const data = await legoUserTemplateListAsync(params);
+    if (data.status === 200) {
+      legoCreateList.value = data.data.records;
+      total.value = data.data.total;
+      currentPage.value = data.data.currentPage;
       isShowSkeleton.value = false;
     } else {
       isShowSkeleton.value = false;
       ElMessage.error(data.data.message);
     }
   };
-  getLegoUserResumeList();
+  getLegoUserTemplateList();
 
   // 改变页码时
   const handleCurrentChange = (currentPage: number) => {
     page.value = currentPage;
-    getLegoUserResumeList();
+    getLegoUserTemplateList();
   };
 
   // 点击删除创作
@@ -67,10 +71,10 @@
     let params = {
       id: id
     };
-    const data = await deleteLegoUserResumeAsync(params);
+    const data = await deleteLegoUserTemplateAsync(params);
     if (data.data.status === 200) {
       ElMessage.success('删除成功');
-      getLegoUserResumeList();
+      getLegoUserTemplateList();
     } else {
       ElMessage.error(data.data.message);
     }
@@ -82,6 +86,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+
       & :last-child:nth-child(3n - 1) {
         margin-right: calc(260px + 15px);
       }

@@ -97,7 +97,7 @@ export const getUsertemplateAsync: any = (id: string) => {
 // 用户分页查询个人简历列表
 export const getMyResumeListAsync: any = (params: any) => {
   return http.request({
-    url: '/huajian/createUserTemplate/getMyResumeList',
+    url: '/resume/page',
     method: 'get',
     params: params
   });

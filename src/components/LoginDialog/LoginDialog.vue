@@ -65,7 +65,7 @@
               />
             </el-form-item>
             <!-- 邮箱验证码 -->
-            <el-form-item prop="verificationCode">
+            <el-form-item v-if="false" prop="verificationCode">
               <div class="email-code-box">
                 <el-input
                   v-model="registerForm.verificationCode"

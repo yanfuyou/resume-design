@@ -10,7 +10,7 @@
 <script lang="ts" setup>
   import MyResumeNew from './myResumeNew/index.vue';
 
-  const activeName = ref('myCreate');
+  const activeName = ref('myResumeNew');
 </script>
 <style lang="scss" scoped>
   .my-resume-new-tab-box {
