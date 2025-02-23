@@ -27,12 +27,12 @@
       title: '个人信息',
       path: '/person/personDetail'
     },
-    // {
-    //   index: 'PersonIntegral',
-    //   iconfont: 'icon-jifen',
-    //   title: '我的资产',
-    //   path: '/person/personIntegral'
-    // },
+    {
+      index: 'PersonIntegral',
+      iconfont: 'icon-jifen',
+      title: '我的资产',
+      path: '/person/personIntegral'
+    },
     {
       index: 'AccountSetting',
       iconfont: 'icon-shezhi',

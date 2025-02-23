@@ -27,12 +27,13 @@
         :limit="limit"
         :current-page="currentPage"
         @handle-current-change="handleCurrentChange"
-      ></Pagination>
+      >
+      </Pagination>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-  import { getUserOrderListAsync } from '@/http/api/integral';
+  // import { getUserOrderListAsync } from '@/http/api/integral';
   import { formatListDate } from '@/utils/common';
 
   // 订单状态对应tags
@@ -62,18 +63,28 @@
   const currentPage = ref<number>(1);
   let tableData = ref<any>([]);
   const getUserOrderList = async () => {
-    let params = {
-      page: page.value,
-      limit: limit.value
+    // let params = {
+    //   page: page.value,
+    //   limit: limit.value
+    // };
+    // TODO 查询订单记录 const data = await getUserOrderListAsync(params);
+    const data = {
+      status: 200,
+      message: 'Suc',
+      data: {
+        currentPage: 1,
+        pageSize: 10,
+        total: 0,
+        records: []
+      }
     };
-    const data = await getUserOrderListAsync(params);
-    if (data.data.status === 200) {
-      tableData.value = data.data.data.list;
-      total.value = data.data.data.page.count;
-      currentPage.value = data.data.data.page.currentPage;
+    if (data.status === 200) {
+      tableData.value = data.data.records;
+      total.value = data.data.total;
+      currentPage.value = data.data.currentPage;
       console.log('tableData', tableData);
     } else {
-      ElMessage.error(data.data.message);
+      ElMessage.error(data.message);
     }
   };
   getUserOrderList();

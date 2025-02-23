@@ -27,7 +27,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { deleteLegoUserTemplateAsync, legoUserTemplateListAsync } from '@/http/api/lego';
+  import { deleteLegoUserResumeAsync, legoUserResumeListAsync } from '@/http/api/lego';
 
   import CreateCard from './CreateCard.vue';
   import NoDataVue from '@/components/NoData/NoData.vue';
@@ -44,10 +44,9 @@
     let params = {
       currentPage: page.value,
       pageSize: limit.value,
-      uid: appStore.useUserInfoStore.userInfo.id,
-      states: [0, 1]
+      uid: appStore.useUserInfoStore.userInfo.id
     };
-    const data = await legoUserTemplateListAsync(params);
+    const data = await legoUserResumeListAsync(params);
     if (data.status === 200) {
       legoCreateList.value = data.data.records;
       total.value = data.data.total;
@@ -71,7 +70,7 @@
     let params = {
       id: id
     };
-    const data = await deleteLegoUserTemplateAsync(params);
+    const data = await deleteLegoUserResumeAsync(params);
     if (data.data.status === 200) {
       ElMessage.success('删除成功');
       getLegoUserTemplateList();

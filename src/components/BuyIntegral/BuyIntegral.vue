@@ -153,6 +153,8 @@
   const dialogQrcodeVisible = ref<boolean>(false); // 支付宝
   const dialogWXQrcodeVisible = ref<boolean>(false); // 微信
   const getOrderQrcode = async () => {
+    ElMessage.info('开发中，限时免费阶段...');
+    return false;
     if (payType.value === 'zfb') {
       dialogQrcodeVisible.value = true;
     } else if (payType.value === 'wxpay') {

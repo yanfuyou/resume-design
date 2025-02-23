@@ -132,7 +132,7 @@
     if (data.status === 200) {
       changeHJSchemaJsonData(data.data.lego_json);
     } else {
-      ElMessage.error(data.data.message);
+      ElMessage.error(data.message);
     }
     closeGlobalLoading();
   };
@@ -162,7 +162,7 @@
         };
       }
     } else {
-      ElMessage.error(data.data.message);
+      ElMessage.error(data.message);
     }
     closeGlobalLoading();
   };

@@ -17,7 +17,7 @@
         </div>
       </el-tooltip>
       <el-tooltip effect="dark" content="保存为简历" placement="bottom">
-        <div class="icon-box" @click="saveDraft">
+        <div class="icon-box" @click="saveDraft(0)">
           <svg-icon icon-name="icon-caogaoxiang1" color="#555" size="17px"></svg-icon>
           <span class="icon-tips">保存</span>
         </div>
@@ -145,7 +145,7 @@
   // 点击下载
   const downloadResumeFile = async (type: string) => {
     // 先保存草稿
-    await saveDraft();
+    await saveDraft(0);
     generateReport(type); // 导出
   };
 
@@ -212,7 +212,7 @@
   const imgUrl = ref<string>('');
   const isCanSave = ref<boolean>(true);
   const _id = ref<string>('');
-  const saveDraft = async () => {
+  const saveDraft = async (publish: number) => {
     if (CONFIG.SAVE_LOCAL) {
       // 保存本地
       let LeogLocal = localStorage.getItem('LegoLogo');
@@ -236,7 +236,8 @@
         const params = {
           previewUrl: imgUrl.value,
           category: category,
-          lego_json: HJSchemaJsonStore.value
+          lego_json: HJSchemaJsonStore.value,
+          online: publish
         };
         const data = await legoUserResumeAsync(params);
         if (data.status === 200) {
@@ -274,13 +275,10 @@
 
   // 发布公开简历
   const publishOnlineResume = async () => {
-    await saveDraft();
-    router.push({
-      path: '/legoPrintPdfPreview',
-      query: {
-        id: _id.value
-      }
-    });
+    await saveDraft(1);
+    // 点击查看
+    const onlineUrl = ref<string>(`${location.origin}/online/${_id.value}`);
+    window.open(onlineUrl.value, '_blank');
   };
 
   // 离开页面之前
@@ -312,7 +310,7 @@
         if (action === 'confirm') {
           instance.confirmButtonLoading = true;
           // 保存草稿并离开
-          await saveDraft();
+          await saveDraft(0);
           instance.confirmButtonLoading = false;
           done();
         } else if (action === 'close') {

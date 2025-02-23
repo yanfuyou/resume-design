@@ -63,7 +63,7 @@ export const updateUserresumeAsync: any = (data: any) => {
 // 查询用户简历列表
 export const getUserResumeListAsync: any = (params: any) => {
   return http.request({
-    url: '/huajian/userresume/templateList',
+    url: '/resume/page',
     method: 'get',
     params: params
   });

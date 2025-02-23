@@ -31,10 +31,11 @@ export const publishOnlineResumeAsync: any = (data: any) => {
 };
 
 // 查询用户的在线简历
-export const getOnlineResumeAsync: any = (id: string) => {
+export const getOnlineResumeAsync: any = (params: any) => {
   return http.request({
-    url: `/template/get/${id}`,
-    method: 'get'
+    url: '/resume/get',
+    method: 'get',
+    params: params
   });
 };
 

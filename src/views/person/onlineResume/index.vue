@@ -36,15 +36,15 @@
   const getUserResumeList = async () => {
     isShowSkeleton.value = true;
     const params = {
-      page: page.value,
-      limit: limit.value,
-      isOnline: true
+      currentPage: page.value,
+      pageSize: limit.value,
+      online: 1
     };
     const data = await getUserResumeListAsync(params);
-    if (data.data.status === 200) {
-      templateList.value = data.data.data.list;
-      total.value = data.data.data.page.count;
-      currentPage.value = data.data.data.page.currentPage;
+    if (data.status === 200) {
+      templateList.value = data.data.records;
+      total.value = data.data.total;
+      currentPage.value = data.data.currentPage;
       isShowSkeleton.value = false;
     } else {
       isShowSkeleton.value = false;
@@ -67,10 +67,12 @@
   .my-resume-box {
     display: flex;
     flex-direction: column;
+
     .resume-list {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+
       & :last-child:nth-child(3n - 1) {
         margin-right: calc(260px + 15px);
       }

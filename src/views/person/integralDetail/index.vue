@@ -116,14 +116,14 @@
       limit: limit.value
     };
     const data = await getUserIntegralLogsAsync(params);
-    if (data.data.status === 200) {
-      integralList.value = data.data.data.list;
-      total.value = data.data.data.page.count;
-      currentPage.value = data.data.data.page.currentPage;
+    if (data.status === 200) {
+      integralList.value = data.data.records;
+      total.value = data.data.total;
+      currentPage.value = data.data.currentPage;
       isShowSkeleton.value = false;
     } else {
       isShowSkeleton.value = false;
-      ElMessage.error(data.data.message);
+      ElMessage.error(data.message);
     }
   };
   getUserIntegralLogs();
@@ -146,6 +146,8 @@
   // 打开获取简币弹窗
   const dialogGetIntegralVisible = ref<boolean>(false);
   const openGetDialog = () => {
+    ElMessage.info('开发中...');
+    return false;
     dialogGetIntegralVisible.value = true;
   };
 
@@ -157,6 +159,8 @@
   // 打开邀请注册弹窗
   const dialogInvitationVisible = ref<boolean>(false);
   const openInvitationDialog = () => {
+    ElMessage.info('开发中...');
+    return false;
     dialogInvitationVisible.value = true;
   };
 

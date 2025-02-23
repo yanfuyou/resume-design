@@ -44,7 +44,7 @@
     router.push({
       path: '/legoDesigner',
       query: {
-        templateId: props.cardData.id,
+        id: props.cardData.id,
         category: props.cardData.category
       }
     });

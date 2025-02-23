@@ -3,7 +3,7 @@ import http from '../request';
 // 查询用户简币
 export const getUserIntegralTotalAsync: any = () => {
   return http.request({
-    url: '/huajian/integral/getUserIntegralTotal',
+    url: '/user-property/get',
     method: 'get'
   });
 };
@@ -20,7 +20,7 @@ export const addIntegralLogAsync: any = (data: any) => {
 // 查询用户简币日志
 export const getUserIntegralLogsAsync: any = (params: any) => {
   return http.request({
-    url: '/huajian/integral/getUserIntegralLogs',
+    url: '/user-property/logs',
     method: 'get',
     params: params
   });

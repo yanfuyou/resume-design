@@ -39,8 +39,8 @@ export const useUserInfoStore = defineStore('userInfoStore', () => {
   // 查询用户当前用户简币信息
   async function getUserIntegralTotal() {
     const data = await getUserIntegralTotalAsync();
-    if (data.data.status === 200) {
-      saveIntegralInfo(data.data.data);
+    if (data.status === 200) {
+      saveIntegralInfo(data.data);
     } else {
       ElMessage({
         message: data.message,

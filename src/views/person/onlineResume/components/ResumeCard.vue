@@ -40,7 +40,7 @@
   };
 
   // 点击查看
-  const onlineUrl = ref<string>(`/online/${props.cardData.ONLINE_LINK}`);
+  const onlineUrl = ref<string>(`/online/${props.cardData.id}`);
   const toOnlinePreview = () => {
     window.open(onlineUrl.value, '_blank');
   };
