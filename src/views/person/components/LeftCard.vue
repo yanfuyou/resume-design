@@ -16,7 +16,11 @@
           class="avatar"
         />
         <el-avatar v-else :size="70">
-          {{ appStore.useUserInfoStore.userInfo.name.split('')[0] }}
+          {{
+            appStore.useUserInfoStore.userInfo.name
+              ? appStore.useUserInfoStore.userInfo.name.split('')[0]
+              : 'S'
+          }}
         </el-avatar>
 
         <!-- 相机图标 -->

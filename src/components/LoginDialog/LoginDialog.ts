@@ -21,7 +21,6 @@ const createDialog = (isLogin = false, to = '', fn?: () => any) => {
       }
     }
   });
-  console.log(Instance);
   document.body.appendChild(mountNode);
   Instance.use(router);
   Instance.mount(mountNode);

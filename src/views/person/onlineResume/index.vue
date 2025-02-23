@@ -25,6 +25,7 @@
   import Pagination from '@/components/Pagination/pagination.vue';
   import { getUserResumeListAsync } from '@/http/api/resume';
   import NoDataVue from '@/components/NoData/NoData.vue';
+  import appStore from '@/store';
 
   // 获取用户简历列表
   const templateList = ref<any>([]);
@@ -38,6 +39,7 @@
     const params = {
       currentPage: page.value,
       pageSize: limit.value,
+      uid: appStore.useUserInfoStore.userInfo.id,
       online: 1
     };
     const data = await getUserResumeListAsync(params);

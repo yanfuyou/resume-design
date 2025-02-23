@@ -362,7 +362,7 @@
           show.value = false;
           // 查询和更新用户信息
           const { getAndUpdateUserInfo } = appStore.useUserInfoStore;
-          getAndUpdateUserInfo();
+          await getAndUpdateUserInfo();
           props.confirm();
         } else {
           isLoginLoading.value = false;
