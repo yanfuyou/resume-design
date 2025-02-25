@@ -11,7 +11,7 @@
     <div class="content-box">
       <div class="content-down-btn">
         <!-- 下载为图片 -->
-        <div class="download-img-box">
+        <div v-if="false" class="download-img-box">
           <el-tooltip :disabled="isCanDownloadImg" content="简币数量不足！">
             <div
               :class="['download-com-box img-box', { 'download-disabled': !isCanDownloadImg }]"
@@ -58,10 +58,10 @@
               <div class="how-much"> 免费下载 </div>
             </template>
           </div>
-          <p> 适合打印、在线投递等(<span>推荐</span>)</p>
+          <p> 适合打印、在线投递等(<span>限时免费</span>)</p>
         </div>
       </div>
-      <div class="get-bi-method" @click="openGetDialog">获取简币</div>
+      <div class="get-bi-method" @click="openGetDialog">获取积分</div>
     </div>
   </el-dialog>
 
@@ -107,7 +107,7 @@
   // 简币是否足够导出PDF
   const isCanDownloadPDF = computed(() => {
     return (
-      Number(userIntegralTotal.userIntegralInfo.value.integralTotal) >=
+      Number(userIntegralTotal.userIntegralInfo.value.integralTotal ?? 0) >=
       Math.abs(props.exportPdfPayIntegral)
     );
   });
@@ -146,8 +146,9 @@
   // 打开获取简币弹窗
   const title = ref<string>('');
   const openGetDialog = () => {
-    title.value = '如何获取简币';
-    dialogGetIntegralVisible.value = true;
+    ElMessage.info('开发中...');
+    // title.value = '如何获取简币';
+    // dialogGetIntegralVisible.value = true;
   };
 </script>
 <style lang="scss" scoped>

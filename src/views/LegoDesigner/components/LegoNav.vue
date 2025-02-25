@@ -82,6 +82,13 @@
     :percentage-num="percentage"
     @cancle="cancleProgress"
   ></process-bar-dialog>
+
+  <publish-dialog
+    :dialog-visible="publishDialogVisible"
+    :resume-url="resumeUrl"
+    @close="() => (publishDialogVisible = false)"
+  >
+  </publish-dialog>
 </template>
 <script lang="ts" setup>
   import appStore from '@/store';
@@ -97,10 +104,12 @@
   import { getImgBase64URL } from '../utils/html2img';
   import { legoUserResumeAsync } from '@/http/api/lego';
   import PostWorkDialog from './PostWorkDialog/PostWorkDialog.vue';
-  import { exportLegoPNG, exportLegoPdf } from '../utils/pdf';
+  import { exportLegoPNG } from '../utils/pdf';
   import ProcessBarDialog from '@/components/ProcessBarDialog/ProcessBarDialog.vue';
   import { onBeforeRouteLeave } from 'vue-router';
   import { getIntegralPayNumber } from '../utils/common';
+  import PublishDialog from './PublishDialog/PublishDialog.vue';
+  // import { uploadFile, getFileUrl } from '@/http/api/oss';
 
   const { HJSchemaJsonStore, draftTips } = storeToRefs(appStore.useLegoJsonStore);
   const { resetHJSchemaJsonData } = appStore.useLegoJsonStore;
@@ -163,7 +172,9 @@
       }
     }, 500);
     if (type === 'pdf') {
-      await exportLegoPdf(_id.value);
+      const onlineUrl = ref<string>(`${location.origin}/legoPrintPdfPreview?id=${_id.value}`);
+      window.open(onlineUrl.value, '_blank');
+      // await exportLegoPdf(_id.value);
     } else {
       await exportLegoPNG(_id.value);
     }
@@ -233,6 +244,11 @@
         isCanSave.value = false;
         draftTips.value = '保存中......';
         imgUrl.value = await getImgBase64URL(props.pagesRefs[0]);
+        // image转File并上传
+        // const file = base64ToFile(imgUrl.value, 'resume.png');
+        // const prewivePath = await uploadFile("resume/preview", file)
+        // const url = await getFileUrl(prewivePath)
+        // imgUrl.value = url;
         const params = {
           previewUrl: imgUrl.value,
           category: category,
@@ -273,12 +289,15 @@
       .catch(() => {});
   };
 
+  const publishDialogVisible = ref(false);
+  const resumeUrl = ref('');
   // 发布公开简历
   const publishOnlineResume = async () => {
     await saveDraft(1);
     // 点击查看
-    const onlineUrl = ref<string>(`${location.origin}/online/${_id.value}`);
-    window.open(onlineUrl.value, '_blank');
+    resumeUrl.value = `${location.origin}/online/${_id.value}`;
+    publishDialogVisible.value = true;
+    //window.open(resumeUrl.value, '_blank')
   };
 
   // 离开页面之前

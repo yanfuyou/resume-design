@@ -5,6 +5,7 @@
   "scripts": {
     "deploy": "npm install && npm run build",
     "dev": "vite",
+    "prod": "vite --mode production",
     "build:local": "vue-tsc --noEmit && vite build",
     "build:dev": "vue-tsc --noEmit && vite build --mode development",
     "build": "cross-env NODE_ENV=production ./node_modules/vite/bin/vite.js build",

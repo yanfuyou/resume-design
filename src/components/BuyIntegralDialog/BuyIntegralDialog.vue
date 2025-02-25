@@ -12,7 +12,7 @@
     <!-- 标题 -->
     <template #header>
       <div class="get-integral-header-box">
-        简币购买<img width="24" src="@/assets/images/jianB.png" alt="简币" />
+        简币购买<img width="24" src="@/assets/images/jianB.png" alt="积分" />
       </div>
     </template>
     <!-- 充值内容 -->

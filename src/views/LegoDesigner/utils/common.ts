@@ -86,6 +86,6 @@ export const getIntegralPayNumber = (integralPayType: string) => {
     // };
     // TODO 查询支付金额
     // const data = await getIntegralPayNumberAsync(params);
-    resolve(-2);
+    resolve(0);
   });
 };

@@ -30,6 +30,10 @@
         ElMessage.error(data.message);
       }
       setUuid();
+
+      setTimeout(() => {
+        window.print();
+      }, 3000);
     }
   };
   getLegoTemplateData();

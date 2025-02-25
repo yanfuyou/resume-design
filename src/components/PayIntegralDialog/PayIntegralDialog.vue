@@ -26,17 +26,17 @@
     <div class="get-integral-content-box">
       <!-- 当前简币数量 -->
       <div class="content-box">
-        <h1 class="title">您当前简币数量</h1>
+        <h1 class="title">您当前积分数量</h1>
         <div class="content">
           <p class="jb-num"
             >{{ formatNumberWithCommas(appStore.useUserInfoStore.userIntegralInfo.integralTotal) }}
-            <img width="22" src="@/assets/images/jianB.png" alt="简币"
+            <img width="22" src="@/assets/images/jianB.png" alt="积分"
           /></p>
         </div>
         <!-- <div class="get-bi-method" @click="openGetDialog">获取简币</div> -->
       </div>
       <!-- 获取简币方式 -->
-      <div class="content-box">
+      <div v-if="false" class="content-box">
         <h1 class="title">获取简币方式</h1>
         <div class="content">
           <div class="table">
@@ -118,7 +118,7 @@
         </div>
       </div>
       <!-- 无限制下载方式 -->
-      <div class="content-box">
+      <div v-if="false" class="content-box">
         <h1 class="title">网站所有内容无限制下载方式（强烈推荐！）</h1>
         <div class="content-member-box">
           <div class="card" @click="toMembership">
