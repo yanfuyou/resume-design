@@ -63,7 +63,7 @@ export const forgetPasswordAsync: any = (email: string) => {
 // 重置密码
 export const resetPasswordAsync: any = (data: any) => {
   return http.request({
-    url: '/huajian/auth/email/reset-password',
+    url: '/user/change-pwd',
     method: 'post',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -78,6 +78,17 @@ export const getAllUserListAsync: any = (params: any) => {
     url: '/huajian/users/getAllUser',
     method: 'get',
     params: params
+  });
+};
+
+export const updateUserInfoAsync: any = (data: any) => {
+  return http.request({
+    url: '/user/change-info',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
   });
 };
 

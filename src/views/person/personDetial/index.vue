@@ -28,11 +28,11 @@
         <el-input v-if="isEdit" v-model="ruleForm.name" />
         <p v-else>{{ appStore.useUserInfoStore.userInfo.name }}</p>
       </el-form-item>
-      <el-form-item label="个性签名:" prop="surname">
+      <el-form-item v-if="false" label="个性签名:" prop="surname">
         <el-input v-if="isEdit" v-model="ruleForm.surname" />
         <p v-else>{{ appStore.useUserInfoStore.userInfo.surname }}</p>
       </el-form-item>
-      <el-form-item label="生日:" prop="birthdaydate">
+      <el-form-item v-if="false" label="生日:" prop="birthdaydate">
         <el-date-picker
           v-if="isEdit"
           v-model="ruleForm.birthdaydate"
@@ -58,7 +58,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { updatePersonInfoAsync } from '@/http/api/user';
+  import { updateUserInfoAsync } from '@/http/api/user';
   import appStore from '@/store';
   import { formatDateToYMD } from '@/utils/common';
   import { FormInstance, FormRules } from 'element-plus';
@@ -116,14 +116,14 @@
     await formEl.validate(async (valid, fields) => {
       if (valid) {
         submitLoading.value = true;
-        const data = await updatePersonInfoAsync(ruleForm);
-        if (data.data.status === 200) {
+        const data = await updateUserInfoAsync(ruleForm);
+        if (data.status === 200) {
           ElMessage.success('更新成功');
           isEdit.value = false;
           submitLoading.value = false;
           getAndUpdateUserInfo(); // 查询用户信息
         } else {
-          ElMessage.error(data.data.message);
+          ElMessage.error(data.message);
           submitLoading.value = false;
         }
       } else {

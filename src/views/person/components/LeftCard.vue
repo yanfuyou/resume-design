@@ -4,11 +4,10 @@
     <div class="avatar-box">
       <el-upload
         class="person-avatar-uploader"
-        :action="uploadAddress()"
-        :headers="{ Authorization: appStore.useTokenStore.token }"
+        action="#"
         :show-file-list="false"
-        :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        :http-request="uploadHandle"
       >
         <img
           v-if="appStore.useUserInfoStore.userInfo.avatar"
@@ -34,30 +33,23 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import CONFIG from '@/config';
-  import { updateUserAvatarAsync } from '@/http/api/user';
   import appStore from '@/store';
   import { UploadProps } from 'element-plus';
   import PersonMenuVue from './PersonMenu.vue';
-
-  // 上传文件地址
-  const uploadAddress = () => {
-    return CONFIG.serverAddress + '/huajian/upload/file/avatar';
-  };
+  import { uploadFile, getFileUrl } from '@/http/api/oss';
+  import { updateUserInfoAsync } from '@/http/api/user';
 
   const { getAndUpdateUserInfo } = appStore.useUserInfoStore;
-  const handleAvatarSuccess: UploadProps['onSuccess'] = async (response) => {
-    appStore.useUserInfoStore.userInfo.photos.profilePic.url = response.data.data.fileUrl;
-    let params = {
-      avatar: response.data.data.fileUrl
+  // 上传文件地址
+  const uploadHandle = async (options: any) => {
+    const objKey = await uploadFile('template/preview', options.file);
+    const avatarUrl = await getFileUrl(objKey);
+    let data = {
+      avatar: avatarUrl
     };
-    const data = await updateUserAvatarAsync(params);
-    if (data.status === 200) {
-      ElMessage.success('更新成功');
-      // 更新用户信息
+    const res = await updateUserInfoAsync(data);
+    if (res.status === 200) {
       getAndUpdateUserInfo();
-    } else {
-      ElMessage.error(data.message);
     }
   };
 
@@ -78,27 +70,32 @@
     background-color: rgba(#fff, 0.5);
     z-index: 2;
     margin-top: 90px;
+
     .avatar-box {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 140px;
+
       .person-avatar-uploader {
         width: 70px;
         height: 70px;
         border-radius: 50%;
         // overflow: hidden;
         position: relative;
+
         .camera-box {
           position: absolute;
           right: 6px;
           bottom: -7px;
         }
+
         :deep(.el-upload) {
           width: 70px;
           height: 70px;
           border: 1px solid #ccc !important;
           border-radius: 50%;
+
           .avatar {
             width: 70px;
             height: 70px;

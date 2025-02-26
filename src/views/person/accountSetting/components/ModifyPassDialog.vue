@@ -116,7 +116,7 @@
       if (valid) {
         let params = {
           email: ruleForm.email,
-          currentPassword: ruleForm.oldPassword,
+          oldPassword: ruleForm.oldPassword,
           newPassword: ruleForm.newPassword
         };
         sureLoading.value = true;
