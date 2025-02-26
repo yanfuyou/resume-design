@@ -133,7 +133,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/legoDesigner',
     name: 'LegoDesigner',
     meta: {
-      title: '积木搭建',
+      title: '自由创造',
       keepAlive: true,
       isShowComNav: false,
       requireLogin: true,
@@ -145,7 +145,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/legoPrintPdfPreview',
     name: 'LegoPrintPdfPreview',
     meta: {
-      title: '积木制作打印预览页',
+      title: '打印预览页',
       keepAlive: false,
       isShowComNav: false,
       requireLogin: false,
@@ -157,7 +157,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/legoTemplateList',
     name: 'LegoTemplateList',
     meta: {
-      title: '积木模板',
+      title: '简历模板',
       keepAlive: true,
       isShowComNav: true,
       requireLogin: false,

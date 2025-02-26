@@ -20,7 +20,7 @@ const menuList = [
     parentId: '',
     iconfont: '',
     name: 'LegoTemplateList',
-    title: '自由创作',
+    title: '个性创作',
     path: '/legoTemplateList',
     index: 2,
     status: 1,

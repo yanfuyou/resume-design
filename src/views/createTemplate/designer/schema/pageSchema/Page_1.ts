@@ -42,7 +42,7 @@ const Page_1 = {
   }, // 全局范围的css样式
   customCss: customCss['page_1'],
   config: {
-    title: '猫步简历', // 页面标题
+    title: '顿悟简历', // 页面标题
     layout: {}
   }, // 当前的页面的配置信息
   meta: {}, // 全局范围的元数据
