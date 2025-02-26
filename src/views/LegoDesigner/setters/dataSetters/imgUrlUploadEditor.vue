@@ -3,11 +3,10 @@
     <el-form-item label="图片上传:">
       <el-upload
         class="hj-img-uploader"
-        :action="uploadAddress()"
-        :headers="{ Authorization: appStore.useTokenStore.token }"
+        action="#"
         :show-file-list="false"
-        :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        :http-request="uploadHandle"
         accept=".jpg,.jpeg,.png,.gif,.JPG,.JPEG,.PNG,.GIF"
       >
         <img
@@ -22,11 +21,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import CONFIG from '@/config';
-  import appStore from '@/store';
   import { UploadProps } from 'element-plus';
   import useSelectWidgetItem from '../../hooks/useSelectWidgetItem';
   import { getImgListStyleImageFile } from '../../widgets/image/imageList';
+  import { uploadFile, getFileUrl } from '@/http/api/oss';
 
   const props = defineProps<{
     id: string;
@@ -36,24 +34,17 @@
   // 选中的widgetItem
   const { widgetItem } = useSelectWidgetItem(props.id, props.pageIndex);
 
-  // 上传文件地址
-  const uploadAddress = () => {
-    return CONFIG.serverAddress + '/huajian/upload/file/legoImages';
-  };
-
-  // 文件上传成功
-  const handleAvatarSuccess: UploadProps['onSuccess'] = async (response: {
-    data: { data: { fileUrl: string } };
-  }) => {
-    widgetItem.dataSource.imgUrl = response.data.data.fileUrl;
-  };
-
   const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
     if (rawFile.size / 1024 / 1024 > 5) {
       ElMessage.error('图片不能大于5M');
       return false;
     }
     return true;
+  };
+
+  const uploadHandle = async (options: any) => {
+    const objKey = await uploadFile('resume/img', options.file);
+    widgetItem.dataSource.imgUrl = await getFileUrl(objKey);
   };
 </script>
 <style lang="scss">

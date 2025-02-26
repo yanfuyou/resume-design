@@ -255,7 +255,9 @@
           lego_json: HJSchemaJsonStore.value,
           online: publish
         };
-        const data = await legoUserResumeAsync(params);
+        const data = await legoUserResumeAsync(params).catch(() => {
+          isCanSave.value = true;
+        });
         if (data.status === 200) {
           const time = moment(new Date()).format('YYYY.MM.DD HH:mm:ss');
           draftTips.value = `已保存草稿  ${time}`;

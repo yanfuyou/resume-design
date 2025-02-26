@@ -3,11 +3,10 @@
     <el-form-item label="头像上传:">
       <el-upload
         class="hj-avatar-uploader"
-        :action="uploadAddress()"
-        :headers="{ Authorization: appStore.useTokenStore.token }"
+        action="#"
         :show-file-list="false"
-        :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        :http-request="uploadHandle"
         accept=".jpg,.jpeg,.png,.gif,.JPG,.JPEG,.PNG,.GIF"
       >
         <img
@@ -22,10 +21,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import CONFIG from '@/config';
-  import appStore from '@/store';
   import { UploadProps } from 'element-plus';
   import useSelectWidgetItem from '../../hooks/useSelectWidgetItem';
+  import { uploadFile, getFileUrl } from '@/http/api/oss';
 
   const props = defineProps<{
     id: string;
@@ -35,21 +33,17 @@
   // 选中的widgetItem
   const { widgetItem } = useSelectWidgetItem(props.id, props.pageIndex);
 
-  // 上传文件地址
-  const uploadAddress = () => {
-    return CONFIG.serverAddress + '/huajian/upload/file/avatar';
-  };
-
-  const handleAvatarSuccess: UploadProps['onSuccess'] = (response) => {
-    widgetItem.dataSource.avatarSrc = response.data.data.fileUrl;
-  };
-
   const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
     if (rawFile.size / 1024 / 1024 > 3) {
       ElMessage.error('头像不能大于3M');
       return false;
     }
     return true;
+  };
+
+  const uploadHandle = async (options: any) => {
+    const objKey = await uploadFile('resume/avatar', options.file);
+    widgetItem.dataSource.avatarSrc = await getFileUrl(objKey);
   };
 </script>
 <style lang="scss">
