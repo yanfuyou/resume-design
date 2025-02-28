@@ -27,7 +27,7 @@
         >今日已签到{{ attendanceTotal }}人~</span
       >
       <!-- 签到按钮 -->
-      <div v-if="false" v-config:open_sign_in class="attendance-box">
+      <div v-config:open_sign_in class="attendance-box">
         <div
           v-if="!appStore.useUserInfoStore.userIntegralInfo.isattendance"
           class="button"
@@ -195,10 +195,7 @@
 
   // 签到
   const toAttendance = async () => {
-    let params = {
-      integralAddType: '1'
-    };
-    const data = await addIntegralLogAsync(params);
+    const data = await addIntegralLogAsync();
     if (data.data.status === 200) {
       ElMessage.success('签到成功！简币+1！');
       // 更新用户简币信息

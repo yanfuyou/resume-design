@@ -9,10 +9,10 @@ export const getUserIntegralTotalAsync: any = () => {
 };
 
 // 添加用户简币信息
-export const addIntegralLogAsync: any = (data: any) => {
+export const addIntegralLogAsync: any = (data?: any) => {
   return http.request({
-    url: '/huajian/integral/addIntegralLog',
-    method: 'post',
+    url: '/user-property/signin',
+    method: 'get',
     data: data
   });
 };
