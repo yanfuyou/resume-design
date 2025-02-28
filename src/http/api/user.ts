@@ -30,7 +30,7 @@ export const registerAsync: any = (data: IRegister) => {
 // 发送邮箱验证码
 export const sendCodeAsync: any = (data: any) => {
   return http.request({
-    url: '/huajian/auth/email/sendCode',
+    url: '/email/send',
     method: 'post',
     data: data
   });

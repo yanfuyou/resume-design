@@ -65,7 +65,7 @@
               />
             </el-form-item>
             <!-- 邮箱验证码 -->
-            <el-form-item v-if="false" prop="verificationCode">
+            <el-form-item prop="verificationCode">
               <div class="email-code-box">
                 <el-input
                   v-model="registerForm.verificationCode"
@@ -132,7 +132,7 @@
               />
             </el-form-item>
           </el-form>
-          <a href="#" @click.prevent="forgetPassword">忘记密码？</a>
+          <a v-if="false" href="#" @click.prevent="forgetPassword">忘记密码？</a>
           <el-button
             class="ghost-button forms_buttons-action"
             :loading="isLoginLoading"
@@ -287,24 +287,6 @@
   // 获取验证码
   const getEmailCode = async () => {
     if (isDisabled.value) return; // 如果按钮已经禁用，直接返回
-
-    ElMessage.success('验证码发送成功，请前往邮箱查看！');
-    // --------------- TODO :待实现接口
-    // 点击后禁用按钮并开始倒计时
-    isDisabled.value = true;
-    countdown.value = 60;
-
-    timer = setInterval(() => {
-      if (countdown.value > 0) {
-        countdown.value--;
-      } else {
-        // 倒计时结束，重置按钮
-        isDisabled.value = false;
-        if (timer) clearInterval(timer);
-      }
-    }, 1000);
-    return;
-    // ------------
     let params = {
       email: registerForm.email
     };
