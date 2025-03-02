@@ -23,13 +23,11 @@
     <!-- GitHub -->
     <div class="right">
       <!-- 今日签到总人数 -->
-      <span v-if="false" v-config:open_sign_in class="attendance-total"
-        >今日已签到{{ attendanceTotal }}人~</span
-      >
+      <span v-config:open_sign_in class="attendance-total">今日已签到{{ attendanceTotal }}人~</span>
       <!-- 签到按钮 -->
       <div v-config:open_sign_in class="attendance-box">
         <div
-          v-if="!appStore.useUserInfoStore.userIntegralInfo.isattendance"
+          v-if="!appStore.useUserInfoStore.userIntegralInfo.isSigned"
           class="button"
           @click="toAttendance"
         >
@@ -56,7 +54,7 @@
         </div>
       </div>
       <!-- 简币 -->
-      <div v-if="false" v-config:open_get_source_code class="jb-num-box" @click="toMyIntegral">
+      <div v-config:open_get_source_code class="jb-num-box" @click="toMyIntegral">
         <div class="content">
           <img width="22" src="@/assets/images/jianB.png" alt="简币" />
           <span>{{ appStore.useUserInfoStore.userIntegralInfo.integralTotal || 0 }}</span>
@@ -196,13 +194,13 @@
   // 签到
   const toAttendance = async () => {
     const data = await addIntegralLogAsync();
-    if (data.data.status === 200) {
-      ElMessage.success('签到成功！简币+1！');
+    if (data.status === 200) {
+      ElMessage.success('签到成功！');
       // 更新用户简币信息
       appStore.useUserInfoStore.getUserIntegralTotal();
       getTodayAttendancePersonTotal();
     } else {
-      ElMessage.error(data.data.message);
+      ElMessage.error(data.message);
     }
   };
 
@@ -216,7 +214,7 @@
       ElMessage.error(data.message);
     }
   };
-  // getTodayAttendancePersonTotal();
+  getTodayAttendancePersonTotal();
 </script>
 <style lang="scss" scoped>
   .nav-bar-box {

@@ -47,7 +47,7 @@ export const getUserIsPayGoodsAsync: any = (params: any) => {
 // 获取今日签到总人数
 export const getTodayAttendancePersonTotalAsync: any = () => {
   return http.request({
-    url: '/huajian/common/getTodayAttendancePersonTotal',
+    url: '/property/signed-count',
     method: 'get'
   });
 };

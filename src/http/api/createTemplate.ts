@@ -54,7 +54,7 @@ export const getTemplateByIdAsync: any = (id: string) => {
 // 查询模板列表
 export const templateListAsync: any = (params: any) => {
   return http.request({
-    url: '/template/list',
+    url: '/template/page',
     method: 'get',
     params: params
   });

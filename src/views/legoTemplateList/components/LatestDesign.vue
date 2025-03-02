@@ -51,11 +51,11 @@
 
   // 跳转至详情
   const router = useRouter();
-  const toDesignDetail = (cardData: { _id: any; category: any }) => {
+  const toDesignDetail = (cardData: { id: any; category: any }) => {
     router.push({
       path: '/legoDesigner',
       query: {
-        id: cardData._id,
+        id: cardData.id,
         category: cardData.category
       }
     });

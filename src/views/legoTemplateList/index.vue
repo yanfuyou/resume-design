@@ -111,13 +111,13 @@
   const personLimit = ref<number>(3);
   const getLegoUserResumeList = async () => {
     let params = {
-      page: 1,
-      limit: personLimit.value,
+      currentPage: 1,
+      pageSize: personLimit.value,
       uid: appStore.useUserInfoStore.userInfo.id
     };
     const data = await legoUserResumeListAsync(params);
     if (data.status === 200) {
-      legoPersonList.value = data.records;
+      legoPersonList.value = data.data.records;
       personTotal.value = 1;
     } else {
       ElMessage.error(data.message);

@@ -321,7 +321,7 @@
   const { setUuid } = appStore.useRefreshStore;
   const { saveToken } = appStore.useTokenStore;
   // const { saveUserInfo } = appStore.useUserInfoStore;
-  // const { getUserIntegralTotal } = appStore.useUserInfoStore;
+  const { getUserIntegralTotal } = appStore.useUserInfoStore;
   const isLoginLoading = ref<boolean>(false);
   const router = useRouter();
   const loginRuleFormRef = ref<FormInstance>();
@@ -335,8 +335,7 @@
           isLoginLoading.value = false;
           setUuid(); // 无感刷新页面
           saveToken('Bearer ' + data.data.token); // 存储token到本地
-          // saveUserInfo(data.data.user); // 存储用户信息
-          // getUserIntegralTotal(); // 查询简币信息
+          getUserIntegralTotal(); // 查询简币信息
           ElMessage({
             message: '登录成功',
             type: 'success'
