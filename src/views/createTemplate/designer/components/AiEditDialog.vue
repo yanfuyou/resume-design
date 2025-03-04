@@ -93,9 +93,9 @@
     async (newVal) => {
       if (newVal) {
         if (props.type === 'edit') {
-          dialogTitle.value = `简历润色优化 - ${props.module.title}`;
+          dialogTitle.value = '简历润色优化';
         } else {
-          dialogTitle.value = `AI简历内容代写 - ${props.module.title}`;
+          dialogTitle.value = 'AI简历内容代写';
         }
         currentModule.value = props.module;
         aiLoading.value = false;
@@ -121,21 +121,14 @@
     if (aiLoading.value) return;
     // 点击AI
     let params = {
-      model: 'glm-4-flash',
-      messages: props.content,
-      number: textNumber.value,
-      type: props.type,
-      moduleTitle: props.module.title
+      context: props.content
     };
-    if (props.type === 'new') {
-      params.messages = aiPropmt.value;
-    }
-    if (!params.messages) {
+    if (!params.context) {
       ElMessage.warning('内容不能为空！');
       return;
     }
     aiLoading.value = true;
-    const data = await aiInvokeAsync(params);
+    const data = await aiInvokeAsync('sign', params);
     if (data.data.status === 200) {
       aiEditContent.value = data.data.data[0].message.content;
     } else {

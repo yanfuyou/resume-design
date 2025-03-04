@@ -1,9 +1,9 @@
 import http from '../request';
 
 // 请求AI
-export const aiInvokeAsync: any = (data: any) => {
+export const aiInvokeAsync: any = (sign: string, data: any) => {
   return http.request({
-    url: '/huajian/ai/invoke',
+    url: '/ai/chat/' + sign,
     method: 'post',
     data: data
   });

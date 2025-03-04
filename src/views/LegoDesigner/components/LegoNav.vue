@@ -5,6 +5,9 @@
     </div>
     <div class="nav-right">
       <el-tooltip effect="dark" content="下载到本地" placement="bottom">
+        <ai-button></ai-button>
+      </el-tooltip>
+      <el-tooltip effect="dark" content="下载到本地" placement="bottom">
         <div class="icon-box icon-download" @click="downloadResume">
           <svg-icon icon-name="icon-xiazai" color="#fff" size="17px"></svg-icon>
           <span class="icon-tips">导出</span>
@@ -110,6 +113,7 @@
   import { getIntegralPayNumber } from '../utils/common';
   import PublishDialog from './PublishDialog/PublishDialog.vue';
   // import { uploadFile, getFileUrl } from '@/http/api/oss';
+  import AiButton from '@/views/createTemplate/designer/components/AiButton.vue';
 
   const { HJSchemaJsonStore, draftTips } = storeToRefs(appStore.useLegoJsonStore);
   const { resetHJSchemaJsonData } = appStore.useLegoJsonStore;
