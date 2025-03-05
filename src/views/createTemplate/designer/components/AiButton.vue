@@ -6,11 +6,11 @@
         <svg-icon icon-name="icon-AI_zhineng" color="#fff" size="12px"></svg-icon>
       </div>
     </el-tooltip>
-    <el-tooltip effect="light" content="AI帮我改" placement="bottom">
+    <!-- <el-tooltip effect="light" content="AI帮我改" placement="bottom">
       <div class="ai-button ai-button-2" @click="aiEdit">
         <svg-icon icon-name="icon-ai" color="#fff" size="12px"></svg-icon>
       </div>
-    </el-tooltip>
+    </el-tooltip> -->
   </div>
 
   <!-- AI简历代写、代改弹窗 -->
@@ -47,17 +47,17 @@
   const dialogAiVisible = ref<boolean>(false);
   const aiType = ref<string>('new');
   const selectedModule = ref<any>(null);
-  const aiEdit = () => {
-    const { token } = appStore.useTokenStore;
-    if (!token) {
-      openLoginDialog();
-      return;
-    }
-    aiType.value = 'edit';
-    selectedModule.value = useGetSelectedModule(props.moduleId);
-    dialogAiVisible.value = true;
-    console.log('需要修改的内容', props.modelValue);
-  };
+  // const aiEdit = () => {
+  //   const { token } = appStore.useTokenStore;
+  //   if (!token) {
+  //     openLoginDialog();
+  //     return;
+  //   }
+  //   aiType.value = 'edit';
+  //   selectedModule.value = useGetSelectedModule(props.moduleId);
+  //   dialogAiVisible.value = true;
+  //   console.log('需要修改的内容', props.modelValue);
+  // };
 
   // 点击AI帮我写
   const aiNew = () => {

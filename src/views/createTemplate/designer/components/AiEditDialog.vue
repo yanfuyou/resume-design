@@ -19,11 +19,14 @@
         <div v-if="type === 'edit'" v-dompurify-html="content" class="content"></div>
         <el-input v-else v-model="aiPropmt" type="textarea" :placeholder="placeholder"> </el-input>
         <!-- 字数限定 -->
-        <div class="text-number-box">
+        <div v-if="false" class="text-number-box">
           <p>限定字数：</p>
           <el-input-number v-model="textNumber" :min="10" :max="2000" />
           <span class="text">字</span>
           <span class="tips">(最大不超过2000字)</span>
+        </div>
+        <div class="text-number-box">
+          <el-button type="warning" @click="clearChatContext">重置上下文</el-button>
         </div>
       </div>
       <div class="ai-content-center">
@@ -63,14 +66,15 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button size="normal" @click="cancle">取消</el-button>
-        <el-button size="normal" type="primary" @click="submit">写入简历</el-button>
+        <!-- <el-button size="normal" type="primary" @click="submit">写入简历</el-button> -->
       </span>
     </template>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
-  import { aiInvokeAsync } from '@/http/api/ai';
+  import CONFIG from '@/config';
+  import { getUuid } from '@/utils/common';
 
   const emit = defineEmits(['cancle', 'updateSuccess']);
   interface TDialog {
@@ -117,45 +121,77 @@
   const aiLoading = ref<boolean>(false);
   const aiEditContent = ref<string>('');
   const textNumber = ref<number>(100);
+  const chatSign = ref<string>(getUuid());
+  const clearChatContext = () => {
+    chatSign.value = getUuid();
+    aiEditContent.value = '';
+  };
   const aiEdit = async () => {
     if (aiLoading.value) return;
     // 点击AI
     let params = {
-      context: props.content
+      content: props.content
     };
-    if (!params.context) {
+    if (props.type === 'new') {
+      params.content = aiPropmt.value;
+    }
+    if (!params.content) {
       ElMessage.warning('内容不能为空！');
       return;
     }
     aiLoading.value = true;
-    const data = await aiInvokeAsync('sign', params);
-    if (data.data.status === 200) {
-      aiEditContent.value = data.data.data[0].message.content;
-    } else {
+    try {
+      const response = await fetch(`${CONFIG.serverAddress}/ai/chat/${chatSign.value}`, {
+        body: JSON.stringify(params),
+        method: 'POST',
+        headers: {
+          Authorization: localStorage.getItem('token') as string
+        }
+      });
+      aiLoading.value = false;
+      // 获取 ReadableStream
+      if (!response.body) {
+        return;
+      }
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          console.log('SSE 流结束');
+          break;
+        }
+        aiEditContent.value += decoder.decode(value, { stream: true });
+      }
+    } catch (error) {
+      console.log('ai调用error', error);
       ElMessage.warning('AI使用人数太多，请重试~~');
+      aiLoading.value = false;
     }
-    aiLoading.value = false;
-    console.log(data);
   };
 
   // 提交
-  const submit = () => {
-    console.log('ai内容:', aiEditContent.value);
-    emit('updateSuccess', aiEditContent.value);
-    cancle();
-  };
+  // const submit = () => {
+  //   console.log('ai内容:', aiEditContent.value);
+  //   emit('updateSuccess', aiEditContent.value);
+  //   cancle();
+  // };
 </script>
 <style lang="scss">
   .ai-content-edit-page-select-warpper {
     display: flex;
+
     .ai-content {
       flex: 1;
+
       .title {
         font-size: 16px;
         margin-bottom: 10px;
       }
+
       .el-textarea {
         height: 400px;
+
         .el-textarea__inner {
           height: 100%;
           resize: none;
@@ -163,6 +199,7 @@
           padding: 10px 15px;
         }
       }
+
       .content {
         height: 400px;
         border: 1px solid #ccc;
@@ -176,6 +213,7 @@
         font-size: 12px;
       }
     }
+
     .ai-content-left {
       .text-number-box {
         display: flex;
@@ -183,15 +221,18 @@
         margin: 10px 0;
         font-size: 12px;
         letter-spacing: 1px;
+
         .text {
           margin-left: 10px;
           margin-right: 5px;
         }
+
         .tips {
           color: #ccc;
         }
       }
     }
+
     .ai-content-center {
       width: 70px;
       display: flex;
@@ -199,13 +240,17 @@
       justify-content: center;
       flex-direction: column;
       user-select: none;
+
       .ai-icon {
         cursor: pointer;
         transition: opacity 0.3s ease;
       }
+
       .ai-icon-loading {
-        animation: rotate 1s linear infinite; /* 旋转动画 */
+        animation: rotate 1s linear infinite;
+        /* 旋转动画 */
       }
+
       span {
         font-size: 12px;
         margin-top: 8px;
@@ -219,6 +264,7 @@
     0% {
       transform: rotate(0deg);
     }
+
     100% {
       transform: rotate(360deg);
     }

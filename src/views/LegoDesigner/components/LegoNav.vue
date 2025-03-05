@@ -4,8 +4,10 @@
       <logo-com icon-color="#74a274" font-color="#74a274"></logo-com>
     </div>
     <div class="nav-right">
-      <el-tooltip effect="dark" content="下载到本地" placement="bottom">
-        <ai-button></ai-button>
+      <el-tooltip effect="dark" placement="bottom">
+        <div class="icon-box">
+          <ai-button></ai-button>
+        </div>
       </el-tooltip>
       <el-tooltip effect="dark" content="下载到本地" placement="bottom">
         <div class="icon-box icon-download" @click="downloadResume">

@@ -5,7 +5,8 @@ export const aiInvokeAsync: any = (sign: string, data: any) => {
   return http.request({
     url: '/ai/chat/' + sign,
     method: 'post',
-    data: data
+    data: data,
+    responseType: 'stream'
   });
 };
 
