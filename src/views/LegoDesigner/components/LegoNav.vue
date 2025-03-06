@@ -4,7 +4,7 @@
       <logo-com icon-color="#74a274" font-color="#74a274"></logo-com>
     </div>
     <div class="nav-right">
-      <el-tooltip effect="dark" placement="bottom">
+      <el-tooltip effect="dark" placement="none">
         <div class="icon-box">
           <ai-button></ai-button>
         </div>

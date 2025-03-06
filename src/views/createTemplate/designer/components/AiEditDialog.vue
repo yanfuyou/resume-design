@@ -53,14 +53,17 @@
         <template v-else>
           <h1 class="title">AI创作内容</h1>
         </template>
-        <el-input
+        <div class="ai-answer">
+          <div v-html="htmlVal"></div>
+        </div>
+        <!-- <el-input
           v-model="aiEditContent"
           v-loading="aiLoading"
           type="textarea"
           :element-loading-text="type === 'edit' ? 'AI拼命润色中~' : '拼命创作中'"
           placeholder="AI创作内容将展示在这里"
         >
-        </el-input>
+        </el-input> -->
       </div>
     </div>
     <template #footer>
@@ -75,7 +78,8 @@
 <script lang="ts" setup>
   import CONFIG from '@/config';
   import { getUuid } from '@/utils/common';
-
+  import MarkdownIt from 'markdown-it';
+  const md = new MarkdownIt();
   const emit = defineEmits(['cancle', 'updateSuccess']);
   interface TDialog {
     dialogAiVisible: boolean;
@@ -92,6 +96,9 @@
 
   const dialogTitle = ref<string>('');
   const currentModule = ref<any>(null);
+  const htmlVal = computed(() => {
+    return md.render(aiEditContent.value);
+  });
   watch(
     () => props.dialogAiVisible,
     async (newVal) => {
@@ -169,7 +176,6 @@
       aiLoading.value = false;
     }
   };
-
   // 提交
   // const submit = () => {
   //   console.log('ai内容:', aiEditContent.value);
@@ -257,6 +263,12 @@
         color: #4e97fb;
       }
     }
+  }
+
+  .ai-answer {
+    height: 400px;
+    border: 1px solid #d4cfcf;
+    overflow-y: scroll;
   }
 
   /* 添加旋转动画 */

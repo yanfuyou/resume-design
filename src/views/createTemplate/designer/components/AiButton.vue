@@ -1,9 +1,9 @@
 <template>
   <!-- AI操作区域 -->
   <div class="ai-box">
-    <el-tooltip effect="light" content="AI帮我写" placement="bottom">
+    <el-tooltip effect="light" content="AI润色" placement="bottom">
       <div class="ai-button ai-button-1" @click="aiNew">
-        <svg-icon icon-name="icon-AI_zhineng" color="#fff" size="12px"></svg-icon>
+        <svg-icon icon-name="icon-AI_zhineng" color="#fff" size="50px"></svg-icon>
       </div>
     </el-tooltip>
     <!-- <el-tooltip effect="light" content="AI帮我改" placement="bottom">
