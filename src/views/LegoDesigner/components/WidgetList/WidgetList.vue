@@ -68,16 +68,19 @@
 
   //拖拽开始的事件
   const dragStart = (event: any, item: IWidgetTab, itemCom: IWidget) => {
-    console.log('拖拽开始', itemCom);
     const widgetItem = cloneDeep(itemCom);
-    widgetItem.dataSource = Object.assign(item.dataSource, itemCom.dataSource);
+    if (item.category != 'date') {
+      widgetItem.dataSource = Object.assign(item.dataSource, itemCom.dataSource);
+    }
     event.dataTransfer.setData('widgetItem', JSON.stringify(widgetItem));
   };
 
   // 点击组件
   const addWidgetToCenter = (item: IWidgetTab, itemCom: IWidget) => {
     const widgetItem = cloneDeep(itemCom);
-    widgetItem.dataSource = Object.assign(item.dataSource, itemCom.dataSource);
+    if (item.category != 'date') {
+      widgetItem.dataSource = Object.assign(item.dataSource, itemCom.dataSource);
+    }
     emit('addWidget', widgetItem);
   };
 
