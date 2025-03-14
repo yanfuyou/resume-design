@@ -23,6 +23,9 @@
     <el-form-item label="">
       <el-radio v-model="radioValue" label="至今" @change="handleRadioChange">至今</el-radio>
     </el-form-item>
+    <el-form-item label="标签:">
+      <el-input v-model="widgetItem.props.label" type="text" />
+    </el-form-item>
   </div>
 </template>
 <script lang="ts" setup>

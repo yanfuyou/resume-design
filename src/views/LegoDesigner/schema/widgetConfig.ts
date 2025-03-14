@@ -23,7 +23,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '10px'
         }, // 组件快照
         keywords: '头像', // 组件关键词，用于搜索
-        category: 'avatar-1', // 组件分类
+        category: 'avatar', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -60,7 +60,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '50%'
         }, // 组件快照
         keywords: '头像', // 组件关键词，用于搜索
-        category: 'avatar-2', // 组件分类
+        category: 'avatar', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -96,7 +96,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '10px'
         }, // 组件快照
         keywords: '圆头像', // 组件关键词，用于搜索
-        category: 'avatar-3', // 组件分类
+        category: 'avatar', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -130,7 +130,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '10px'
         }, // 组件快照
         keywords: '头像', // 组件关键词，用于搜索
-        category: 'avatar-4', // 组件分类
+        category: 'avatar', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -164,7 +164,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '10px'
         }, // 组件快照
         keywords: '头像', // 组件关键词，用于搜索
-        category: 'avatar-5', // 组件分类
+        category: 'avatar', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -198,7 +198,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '10px'
         }, // 组件快照
         keywords: '头像', // 组件关键词，用于搜索
-        category: 'avatar-6', // 组件分类
+        category: 'avatar', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -1711,7 +1711,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '4px'
         }, // 组件快照
         keywords: '年', // 组件关键词，用于搜索
-        category: 'rate', // 组件分类
+        category: 'year', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -1757,7 +1757,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '4px'
         }, // 组件快照
         keywords: '日', // 组件关键词，用于搜索
-        category: 'rate', // 组件分类
+        category: 'day', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -1803,7 +1803,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '4px'
         }, // 组件快照
         keywords: '月', // 组件关键词，用于搜索
-        category: 'rate', // 组件分类
+        category: 'month', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -1849,7 +1849,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '4px'
         }, // 组件快照
         keywords: '月份范围', // 组件关键词，用于搜索
-        category: 'rate', // 组件分类
+        category: 'monthRange', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,
@@ -1895,7 +1895,7 @@ export const WIDGET_CONFIG_LIST: Array<IWidgetTab> = [
           borderRadius: '4px'
         }, // 组件快照
         keywords: '日期范围', // 组件关键词，用于搜索
-        category: 'rate', // 组件分类
+        category: 'dateRange', // 组件分类
         props: {}, // 组件属性
         css: {
           left: 0,

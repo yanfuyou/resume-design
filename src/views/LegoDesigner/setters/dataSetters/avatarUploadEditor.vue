@@ -18,6 +18,9 @@
       </el-upload>
       <p class="tips">头像大小不能超过3M，仅支持（jpg、jpeg、png、gif）格式</p>
     </el-form-item>
+    <el-form-item label="标签:">
+      <el-input v-model="widgetItem.props.label" type="text" />
+    </el-form-item>
   </div>
 </template>
 <script lang="ts" setup>

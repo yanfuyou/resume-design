@@ -8,6 +8,9 @@
         value-format="YYYY.MM.DD"
       />
     </el-form-item>
+    <el-form-item label="标签:">
+      <el-input v-model="widgetItem.props.label" type="text" />
+    </el-form-item>
   </div>
 </template>
 <script lang="ts" setup>
